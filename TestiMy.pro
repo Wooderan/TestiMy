@@ -24,10 +24,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    testitem.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    testitem.h
 
 FORMS += \
         mainwindow.ui
