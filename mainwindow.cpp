@@ -11,5 +11,6 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     //comment
+    //comment-2
     delete ui;
 }
