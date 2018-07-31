@@ -1,6 +1,8 @@
 #include "testitem.h"
 
 
+Variant::Variant()
+{}
 Variant::Variant(bool _correct, QString _answer)
     :correct(_correct), answer(_answer)
 {}

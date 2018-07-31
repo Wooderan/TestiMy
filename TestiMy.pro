@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets
+QT       += core gui widgets quick
 
 TARGET = TestiMy
 TEMPLATE = app
@@ -25,11 +25,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    testitem.cpp
+    testitem.cpp \
+    test.cpp
 
 HEADERS += \
         mainwindow.h \
-    testitem.h
+    testitem.h \
+    test.h
 
 FORMS += \
         mainwindow.ui

@@ -5,6 +5,7 @@
 #include <vector>
 
 struct Variant{
+    Variant();
     Variant(bool _correct, QString _answer);
     bool correct;
     QString answer;
@@ -16,7 +17,7 @@ protected:
     QString question;
     std::vector<Variant> variants;
 public:
-    TestItem(QString _str, int _n);
+    TestItem(QString _str, int _n = 0);
     const QString &getQuestion() const;
     void setQuestion(const QString &value);
     const Variant &at(size_t n);
