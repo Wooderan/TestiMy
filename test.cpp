@@ -12,7 +12,12 @@ TestItem &Test::at(int n)
     return questions[n];
 }
 
-void Test::addQuestion(QString _str, int _n)
+void Test::addQuestion(QString _str)
 {
-    questions.append(TestItem(_str, _n));
+    questions.append(TestItem(_str));
+}
+
+void Test::addQuestion(TestItem _question)
+{
+    questions.append(_question);
 }

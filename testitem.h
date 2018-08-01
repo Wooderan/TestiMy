@@ -2,7 +2,7 @@
 #define TESTITEM_H
 
 #include <QString>
-#include <vector>
+#include <QList>
 
 struct Variant{
     Variant();
@@ -15,14 +15,14 @@ class TestItem
 {
 protected:
     QString question;
-    std::vector<Variant> variants;
+    QList<Variant> variants;
 public:
-    TestItem(QString _str, int _n = 0);
+    TestItem(QString _str);
     const QString &getQuestion() const;
     void setQuestion(const QString &value);
-    const Variant &at(size_t n);
+    const Variant &at(size_t n)const;
     void addVar(bool _correct, QString _answ);
-    size_t getN();
+    size_t getN()const;
 };
 
 #endif // TESTITEM_H

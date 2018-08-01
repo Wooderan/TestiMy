@@ -4,15 +4,15 @@
 #include <QQuickItem>
 #include "testitem.h"
 
-class Test : public QQuickItem
+class Test
 {
-    Q_OBJECT
 protected:
     QList<TestItem> questions;
 public:
     Test();
     TestItem& at(int n);
-    void addQuestion(QString _str, int _n = 0);
+    void addQuestion(QString _str);
+    void addQuestion(TestItem _question);
 
 signals:
 

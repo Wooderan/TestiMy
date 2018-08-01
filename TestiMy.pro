@@ -26,12 +26,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     testitem.cpp \
-    test.cpp
+    test.cpp \
+    testitemwidget.cpp
 
 HEADERS += \
         mainwindow.h \
     testitem.h \
-    test.h
+    test.h \
+    testitemwidget.h
 
 FORMS += \
         mainwindow.ui
