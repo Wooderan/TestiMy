@@ -10,9 +10,10 @@ protected:
     QList<TestItem> questions;
 public:
     Test();
-    TestItem& at(int n);
+    TestItem at(size_t n)const;
     void addQuestion(QString _str);
     void addQuestion(TestItem _question);
+    size_t getN()const;
 
 signals:
 
