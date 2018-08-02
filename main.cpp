@@ -23,11 +23,19 @@ int main(int argc, char *argv[])
     item2.addVar(false, "where4");
 
     Test test;
+    test.setName("Test");
     test.addQuestion(item);
     test.addQuestion(item2);
     test.setTime(QTime(0,0,10));
+    if(!test.Save())
+        qDebug() << "Save failed";
 
-    TestExamineDialog dialog(test);
+    Test test2;
+    if (!test2.Load("Test")) {
+        qDebug() << "Load failed";
+    }
+
+    TestExamineDialog dialog(test2);
     return dialog.exec();
 //    return a.exec();
 }

@@ -17,11 +17,14 @@ protected:
     QString question;
     QList<Variant> variants;
 public:
+    TestItem();
     TestItem(QString _str);
-    const QString &getQuestion() const;
+    QString &getQuestion();
+    QString getQuestion()const;
     void setQuestion(const QString &value);
-    const Variant &at(size_t n)const;
+    Variant at(size_t n)const;
     void addVar(bool _correct, QString _answ);
+    void addVar(Variant _var);
     size_t getN()const;
 };
 
