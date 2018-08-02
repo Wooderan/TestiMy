@@ -17,6 +17,11 @@ TestItemWidget::TestItemWidget(const TestItem &_item, QWidget *parent)
     mainLayout->addLayout(subLayout);
 }
 
+QString TestItemWidget::getCorrect_variant() const
+{
+    return correct_variant;
+}
+
 void TestItemWidget::fill_subLayout(QGridLayout *_layout, const TestItem &_item)
 {
     int col = 0,

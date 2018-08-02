@@ -15,6 +15,8 @@ private:
 public:
     explicit TestItemWidget(const TestItem& _item, QWidget *parent = nullptr);
 
+    QString getCorrect_variant() const;
+
 signals:
 
 public slots:

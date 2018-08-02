@@ -1,6 +1,36 @@
 #include "test.h"
 #include <cassert>
 
+QString Test::getName() const
+{
+    return name;
+}
+
+void Test::setName(const QString &value)
+{
+    name = value;
+}
+
+QString Test::getDescripton() const
+{
+    return descripton;
+}
+
+void Test::setDescripton(const QString &value)
+{
+    descripton = value;
+}
+
+QTime Test::getTime() const
+{
+    return time;
+}
+
+void Test::setTime(const QTime &value)
+{
+    time = value;
+}
+
 Test::Test()
 {
 

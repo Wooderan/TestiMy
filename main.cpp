@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
     Test test;
     test.addQuestion(item);
     test.addQuestion(item2);
+    test.setTime(QTime(0,0,10));
 
     TestExamineDialog dialog(test);
     return dialog.exec();
