@@ -4,6 +4,7 @@
 #include "testitem.h"
 #include "testitemwidget.h"
 #include "testexaminedialog.h"
+#include "testitemcreatewidget.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,16 +12,15 @@ int main(int argc, char *argv[])
 //    MainWindow w;
 //    w.show();
 
-    TestItem item("What?");
-    item.addVar(false, "what1");
-    item.addVar(false, "what2");
-    item.addVar(true, "what3");
-    item.addVar(false, "what4");
-    TestItem item2("Where?");
-    item2.addVar(false, "where1");
-    item2.addVar(false, "where2");
-    item2.addVar(true, "where3");
-    item2.addVar(false, "where4");
+    TestItemCreateWidget widget;
+    widget.show();
+    a.exec();
+    TestItem item = widget.getItem();
+
+    TestItemCreateWidget widget2;
+    widget2.show();
+    a.exec();
+    TestItem item2 = widget2.getItem();
 
     Test test;
     test.setName("Test");
@@ -37,5 +37,7 @@ int main(int argc, char *argv[])
 
     TestExamineDialog dialog(test2);
     return dialog.exec();
+
+
 //    return a.exec();
 }

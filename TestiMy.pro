@@ -28,18 +28,24 @@ SOURCES += \
     testitem.cpp \
     test.cpp \
     testitemwidget.cpp \
-    testexaminedialog.cpp
+    testexaminedialog.cpp \
+    testcreatedialog.cpp \
+    testitemcreatewidget.cpp
 
 HEADERS += \
         mainwindow.h \
     testitem.h \
     test.h \
     testitemwidget.h \
-    testexaminedialog.h
+    testexaminedialog.h \
+    testcreatedialog.h \
+    testitemcreatewidget.h
 
 FORMS += \
         mainwindow.ui \
-    testexaminedialog.ui
+    testexaminedialog.ui \
+    testcreatedialog.ui \
+    testitemcreatewidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

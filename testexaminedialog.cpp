@@ -11,6 +11,7 @@ TestExamineDialog::TestExamineDialog(const Test &_test, QWidget *parent) :
     ui(new Ui::TestExamineDialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle(QString("TestiMy - %1").arg(_test.getName()));
 
     size_t n = _test.getN();
     QWidget* scrollWidget = new QWidget(this);
@@ -33,6 +34,9 @@ TestExamineDialog::TestExamineDialog(const Test &_test, QWidget *parent) :
 
     QObject::connect(ui->btn_Check, &QPushButton::clicked, this, &TestExamineDialog::check_results);
     QObject::connect(this, &TestExamineDialog::TimeOut, this, &TestExamineDialog::check_results);
+
+    ui->label_Name->setText(_test.getName());
+    ui->label_Description->setText(_test.getDescripton());
 }
 
 TestExamineDialog::~TestExamineDialog()
