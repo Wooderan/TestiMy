@@ -30,7 +30,11 @@ SOURCES += \
     testitemwidget.cpp \
     testexaminedialog.cpp \
     testcreatedialog.cpp \
-    testitemcreatewidget.cpp
+    testitemcreatewidget.cpp \
+    createaccountform.cpp \
+    account.cpp \
+    authorizationstackedwidget.cpp \
+    loginform.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,13 +43,19 @@ HEADERS += \
     testitemwidget.h \
     testexaminedialog.h \
     testcreatedialog.h \
-    testitemcreatewidget.h
+    testitemcreatewidget.h \
+    createaccountform.h \
+    account.h \
+    authorizationstackedwidget.h \
+    loginform.h
 
 FORMS += \
         mainwindow.ui \
     testexaminedialog.ui \
     testcreatedialog.ui \
-    testitemcreatewidget.ui
+    testitemcreatewidget.ui \
+    createaccountform.ui \
+    loginform.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

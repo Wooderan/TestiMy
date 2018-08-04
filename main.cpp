@@ -6,6 +6,7 @@
 #include "testexaminedialog.h"
 #include "testcreatedialog.h"
 #include "testitemcreatewidget.h"
+#include "authorizationstackedwidget.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,21 +29,22 @@ int main(int argc, char *argv[])
 //    test.addQuestion(item2);
 //    test.setTime(QTime(0,0,10));
 
-    TestCreateDialog create_dialog;
-    create_dialog.setWindowState(Qt::WindowMaximized);
-    create_dialog.exec();
-    Test test = create_dialog.getTest();
-    if(!test.Save())
-        qDebug() << "Save failed";
+//    TestCreateDialog create_dialog;
+//    create_dialog.setWindowState(Qt::WindowMaximized);
+//    create_dialog.exec();
+//    Test test = create_dialog.getTest();
+//    if(!test.Save())
+//        qDebug() << "Save failed";
 
-    Test test2;
-    if (!test2.Load(test.getName())) {
-        qDebug() << "Load failed";
-    }
+//    Test test2;
+//    if (!test2.Load(test.getName())) {
+//        qDebug() << "Load failed";
+//    }
 
-    TestExamineDialog dialog(test2);
-    return dialog.exec();
+//    TestExamineDialog dialog(test2);
+//    return dialog.exec();
 
-
-//    return a.exec();
+    AuthorizationStackedWidget authorize;
+    authorize.show();
+    return a.exec();
 }
