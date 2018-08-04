@@ -4,8 +4,8 @@
 #include <QQuickItem>
 #include <QTime>
 #include "testitem.h"
+#include "globals.h"
 
-const QString DEFAULT_DIR_NAME("testimy_tests");
 
 class Test
 {

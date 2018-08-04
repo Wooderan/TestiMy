@@ -3,14 +3,14 @@
 #include <QDialogButtonBox>
 
 #include "account.h"
-#include "authorizationstackedwidget.h"
 #include <QMessageBox>
 
-CreateAccountForm::CreateAccountForm(QWidget *parent) :
+CreateAccountForm::CreateAccountForm(AuthorizationDialog *_dialog, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CreateAccountForm)
 {
     ui->setupUi(this);
+    dialog = _dialog;
 }
 
 CreateAccountForm::~CreateAccountForm()
@@ -30,10 +30,11 @@ void CreateAccountForm::on_buttonBox_accepted()
     if (ui->radioButton_teacher->isChecked()) acc.setPermission(Account::Teacher);
     else acc.setPermission(Account::Student);
 
-    AuthorizationStackedWidget *parent = dynamic_cast<AuthorizationStackedWidget*>(this->parent());
-    if (parent != nullptr && !parent->checkAccount(acc)) {
-        parent->addAccount(acc);
-        emit parent->login_succes(true);
+    if (dialog != nullptr && !dialog->Accounts().checkAccount(acc)) {
+        dialog->Accounts().addAccount(acc);
+        dialog->Accounts().Save();
+        dialog->setCurr_account(acc);
+        dialog->accept();
     }else{
         QMessageBox::critical(this, "Can't create account", "Account with such login exists!");
     }
@@ -41,8 +42,5 @@ void CreateAccountForm::on_buttonBox_accepted()
 
 void CreateAccountForm::on_buttonBox_rejected()
 {
-    AuthorizationStackedWidget *widget = dynamic_cast<AuthorizationStackedWidget*>(this->parent());
-    if (widget != nullptr) {
-        emit widget->changeIndex(0);
-    }
+    dialog->setSubWidget(dialog->getLoginId());
 }

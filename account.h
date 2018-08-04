@@ -30,6 +30,9 @@ public:
     Role& getPermission();
     void setPermission(const Role &value);
 
+    friend QDataStream& operator<<(QDataStream& ostream, const Account& var);
+    friend QDataStream& operator>>(QDataStream& istream, Account& var);
+
 private:
     QString login;
     uint password;

@@ -6,7 +6,7 @@
 #include "testexaminedialog.h"
 #include "testcreatedialog.h"
 #include "testitemcreatewidget.h"
-#include "authorizationstackedwidget.h"
+#include "authorizationdialog.h"
 
 int main(int argc, char *argv[])
 {
@@ -44,7 +44,11 @@ int main(int argc, char *argv[])
 //    TestExamineDialog dialog(test2);
 //    return dialog.exec();
 
-    AuthorizationStackedWidget authorize;
-    authorize.show();
-    return a.exec();
+    AuthorizationDialog authorize;
+    Account acc;
+    if (authorize.exec() == QDialog::Accepted) {
+        acc = authorize.getCurr_account();
+        qDebug() << "Good!";
+    }
+
 }

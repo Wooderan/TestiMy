@@ -33,8 +33,9 @@ SOURCES += \
     testitemcreatewidget.cpp \
     createaccountform.cpp \
     account.cpp \
-    authorizationstackedwidget.cpp \
-    loginform.cpp
+    loginform.cpp \
+    accountslist.cpp \
+    authorizationdialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,8 +47,10 @@ HEADERS += \
     testitemcreatewidget.h \
     createaccountform.h \
     account.h \
-    authorizationstackedwidget.h \
-    loginform.h
+    loginform.h \
+    accountslist.h \
+    authorizationdialog.h \
+    globals.h
 
 FORMS += \
         mainwindow.ui \
@@ -55,7 +58,8 @@ FORMS += \
     testcreatedialog.ui \
     testitemcreatewidget.ui \
     createaccountform.ui \
-    loginform.ui
+    loginform.ui \
+    authorizationdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

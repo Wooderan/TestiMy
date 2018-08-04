@@ -2,6 +2,7 @@
 #define LOGINFORM_H
 
 #include <QWidget>
+#include "authorizationdialog.h"
 
 namespace Ui {
 class LoginForm;
@@ -12,7 +13,7 @@ class LoginForm : public QWidget
     Q_OBJECT
 
 public:
-    explicit LoginForm(QWidget *parent = nullptr);
+    explicit LoginForm(AuthorizationDialog *dialog, QWidget *parent = nullptr);
     ~LoginForm();
 
 private slots:
@@ -25,6 +26,7 @@ private slots:
 
 private:
     Ui::LoginForm *ui;
+    AuthorizationDialog *dialog;
 };
 
 #endif // LOGINFORM_H

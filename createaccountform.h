@@ -2,6 +2,7 @@
 #define CREATEACCOUNTFORM_H
 
 #include <QWidget>
+#include "authorizationdialog.h"
 
 namespace Ui {
 class CreateAccountForm;
@@ -12,7 +13,7 @@ class CreateAccountForm : public QWidget
     Q_OBJECT
 
 public:
-    explicit CreateAccountForm(QWidget *parent = nullptr);
+    explicit CreateAccountForm(AuthorizationDialog* _dialog, QWidget *parent = nullptr);
     ~CreateAccountForm();
 
 private slots:
@@ -22,6 +23,7 @@ private slots:
 
 private:
     Ui::CreateAccountForm *ui;
+    AuthorizationDialog *dialog;
 };
 
 #endif // CREATEACCOUNTFORM_H
