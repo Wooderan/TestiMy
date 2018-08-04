@@ -5,6 +5,7 @@
 
 #include <QRadioButton>
 #include <QDebug>
+#include "testitemcreatewidget.h"
 
 TestExamineDialog::TestExamineDialog(const Test &_test, QWidget *parent) :
     QDialog(parent),

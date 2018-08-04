@@ -2,6 +2,7 @@
 #define TESTCREATEDIALOG_H
 
 #include <QDialog>
+#include "test.h"
 
 namespace Ui {
 class TestCreateDialog;
@@ -15,8 +16,17 @@ public:
     explicit TestCreateDialog(QWidget *parent = nullptr);
     ~TestCreateDialog();
 
+    Test getTest() const;
+
+private slots:
+    void on_accepted();
+
+    void on_pushButton_add_clicked();
+
 private:
     Ui::TestCreateDialog *ui;
+    void scrollEvent(int min, int max);
+    Test test;
 };
 
 #endif // TESTCREATEDIALOG_H

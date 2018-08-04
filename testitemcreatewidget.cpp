@@ -19,27 +19,28 @@ TestItemCreateWidget::~TestItemCreateWidget()
 
 TestItem TestItemCreateWidget::getItem() const
 {
-    TestItem* item = new TestItem;
+    TestItem item;
     QObjectList list = this->children();
 
     for (int i = 0; i < list.count(); i++) {
         QTextEdit *question = dynamic_cast<QTextEdit*>(list.at(i));
         if (question != nullptr && question->objectName() == "text_question") {
-            item->setQuestion(question->toPlainText());
+            item.setQuestion(question->toPlainText());
         }
         MyRadioButton *rb = dynamic_cast<MyRadioButton*>(list.at(i));
         if (rb != nullptr) {
-            item->addVar(rb->isChecked(), rb->respond_line()->text());
+            item.addVar(rb->isChecked(), rb->respond_line()->text());
         }
     }
 
-    return *item;
+    return item;
 }
 
 
 void TestItemCreateWidget::on_addBtn_clicked()
 {
     MyRadioButton *rb = new MyRadioButton(this);
+    rb->setChecked(true);
     QLineEdit *le = new QLineEdit(this);
     MyPushButton *pb = new MyPushButton(this);
     QObject::connect(pb, &MyPushButton::clicked, this, &TestItemCreateWidget::deleteLine);
