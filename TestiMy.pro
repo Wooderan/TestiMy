@@ -35,7 +35,14 @@ SOURCES += \
     account.cpp \
     loginform.cpp \
     accountslist.cpp \
-    authorizationdialog.cpp
+    authorizationdialog.cpp \
+    testlistmodel.cpp \
+    createwindow.cpp \
+    treecategory.cpp \
+    changepassworddialog.cpp \
+    manageaccountsdialog.cpp \
+    accountslistmodel.cpp \
+    changeaccountdialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -50,7 +57,14 @@ HEADERS += \
     loginform.h \
     accountslist.h \
     authorizationdialog.h \
-    globals.h
+    globals.h \
+    testlistmodel.h \
+    createwindow.h \
+    treecategory.h \
+    changepassworddialog.h \
+    manageaccountsdialog.h \
+    accountslistmodel.h \
+    changeaccountdialog.h
 
 FORMS += \
         mainwindow.ui \
@@ -59,7 +73,11 @@ FORMS += \
     testitemcreatewidget.ui \
     createaccountform.ui \
     loginform.ui \
-    authorizationdialog.ui
+    authorizationdialog.ui \
+    createwindow.ui \
+    changepassworddialog.ui \
+    manageaccountsdialog.ui \
+    changeaccountdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

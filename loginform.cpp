@@ -42,7 +42,7 @@ void LoginForm::on_buttonBox_accepted()
     if (dialog->Accounts().checkAccount(acc)) {
         if (dialog->Accounts().checkPassword(acc)) {
             dialog->accept();
-            dialog->setCurr_account(acc);
+            dialog->setCurr_account(dialog->Accounts().getAccount(acc.getLogin()));
         }else{
             QMessageBox::critical(this, "Error", "Password or permission is wrong");
             return;

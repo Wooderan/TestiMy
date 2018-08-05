@@ -47,16 +47,10 @@ void Test::setTime(const QTime &value)
     time = value;
 }
 
-class find_dir_name
+QString &Test::getCategory()
 {
-    QString needle;
-public:
-    find_dir_name(QString _needle):needle(_needle){}
-    bool operator()(QFileInfo _info){
-        if (_info.isDir() && _info.fileName() == needle) return true;
-        return false;
-    }
-};
+    return category;
+}
 
 QDataStream& operator<<(QDataStream& ostream, const Variant& var)
 {
@@ -92,7 +86,7 @@ QDataStream& operator>>(QDataStream& istream, TestItem& testitem)
 
 QDataStream& operator<<(QDataStream& ostream, const Test& test)
 {
-    ostream << test.getName() << test.getDescripton() << test.getTime();
+    ostream << test.getName() << test.getDescripton() << test.getTime() << test.getCategory();
     ostream << static_cast<int>(test.getN());
     for (size_t i = 0; i < test.getN(); i++) {
         ostream << test.at(i);
@@ -101,7 +95,7 @@ QDataStream& operator<<(QDataStream& ostream, const Test& test)
 }
 QDataStream& operator>>(QDataStream& istream, Test& test)
 {
-    istream >> test.getName() >> test.getDescripton() >> test.getTime();
+    istream >> test.getName() >> test.getDescripton() >> test.getTime() >> test.getCategory();
     int n;
     istream >> n;
     for (size_t i = 0; i < static_cast<size_t>(n); i++) {
@@ -111,54 +105,8 @@ QDataStream& operator>>(QDataStream& istream, Test& test)
     }
     return istream;
 }
-//QTextStream& operator<<(QTextStream& ostream, const Variant& var)
-//{
-//    ostream << var.correct << var.answer;
-//    return ostream;
-//}
-//QTextStream& operator>>(QTextStream& istream, Variant& var)
-//{
-////    istream >> var.correct >> var.answer;
-//    return istream;
-//}
 
-//QTextStream& operator<<(QTextStream& ostream, const TestItem& testitem)
-//{
-//    ostream << testitem.getQuestion();
-//    for (size_t i = 0; i < testitem.getN(); i++) {
-//        ostream << testitem.at(i);
-//    }
-//    return ostream;
-//}
-//QTextStream& operator>>(QTextStream& istream, TestItem& testitem)
-//{
-//    istream >> testitem.getQuestion();
-//    Variant variant;
-//    for (size_t i = 0; i < testitem.getN(); i++) {
-//        istream >> variant;
-//        testitem.addVar(variant);
-//    }
-//    return istream;
-//}
-
-//QTextStream& operator<<(QTextStream& ostream, const Test& test)
-//{
-//    ostream << test.getName() << test.getDescripton() << test.getTime().toString();
-//    for (size_t i = 0; i < test.getN(); i++) {
-//        ostream << test.at(i);
-//    }
-//    return ostream;
-//}
-//QTextStream& operator>>(QTextStream& istream, Test& test)
-//{
-//    istream >> test.getName() >> test.getDescripton() >> test.getTime().toString();
-//    for (size_t i = 0; i < test.getN(); i++) {
-//        istream >> test.at(i);
-//    }
-//    return istream;
-//}
-
-bool Test::Save()
+bool Test::Save() const
 {
     QDir Dir(QCoreApplication::applicationDirPath());
     if(!Dir.exists()) return false;
@@ -201,9 +149,27 @@ bool Test::Load(QString _fileName)
     return true;
 }
 
+bool operator==(const Test &_left, const Test &_right)
+{
+    if (_left.name != _right.name) return false;
+    if (_left.descripton != _right.descripton) return false;
+    if (_left.time != _right.time) return false;
+    return true;
+}
+
+QString Test::getCategory() const
+{
+    return category;
+}
+
+void Test::setCategory(const QString &value)
+{
+    category = value;
+}
+
 Test::Test()
 {
-
+    name = "No name";
 }
 
 Test::~Test()
@@ -236,4 +202,11 @@ void Test::addQuestion(TestItem _question)
 size_t Test::getN() const
 {
     return static_cast<size_t>(questions.count());
+}
+
+find_dir_name::find_dir_name(QString _needle):needle(_needle){}
+
+bool find_dir_name::operator()(QFileInfo _info){
+    if (_info.isDir() && _info.fileName() == needle) return true;
+    return false;
 }

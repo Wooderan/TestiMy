@@ -16,11 +16,12 @@ AuthorizationDialog::AuthorizationDialog(QWidget *parent) :
     this->layout()->addWidget(widget);
 
     LoginForm *login_form = new LoginForm(this, widget);
-    CreateAccountForm *create_form = new CreateAccountForm(this, widget);
+    CreateAccountForm *create_form = new CreateAccountForm(accounts, this, widget);
 
     loginId = widget->addWidget(login_form);
     createId = widget->addWidget(create_form);
     setSubWidget(loginId);
+//    QObject::connect(this, &QDialog::accepted, this, &QDialog::accept);
 }
 
 AuthorizationDialog::~AuthorizationDialog()
@@ -62,4 +63,12 @@ int AuthorizationDialog::getCreateId() const
 void AuthorizationDialog::setSubWidget(int id)
 {
     widget->setCurrentIndex(id);
+}
+
+void AuthorizationDialog::accept()
+{
+    if (widget->currentIndex() == 1) {
+        curr_account = dynamic_cast<CreateAccountForm*>(widget->currentWidget())->getCurr_account();
+    }
+    QDialog::accept();
 }

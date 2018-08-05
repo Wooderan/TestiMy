@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef CREATEWINDOW_H
+#define CREATEWINDOW_H
 
 #include <QItemSelection>
 #include <QMainWindow>
@@ -7,16 +7,16 @@
 #include "testlistmodel.h"
 
 namespace Ui {
-class MainWindow;
+class CreateWindow;
 }
 
-class MainWindow : public QMainWindow
+class CreateWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(const Account& account, QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit CreateWindow(const Account& account, QWidget *parent = nullptr);
+    ~CreateWindow();
 
 public slots:
     void test_change(const QItemSelection &selected, const QItemSelection &deselected);
@@ -25,10 +25,16 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_pushButton_2_clicked();
+
+    void on_actionChange_login_or_password_triggered();
+
+    void on_actionManage_accounts_triggered();
+
 private:
-    Ui::MainWindow *ui;
+    Ui::CreateWindow *ui;
     Account account;
     TestListModel *tests;
 };
 
-#endif // MAINWINDOW_H
+#endif // CREATEWINDOW_H

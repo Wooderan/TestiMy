@@ -5,6 +5,8 @@ Account::Account()
 
 }
 
+const QString Account::RoleStr[] = {"Teacher", "Student"};
+
 QString Account::getLogin() const
 {
     return login;
@@ -62,18 +64,66 @@ void Account::setPermission(const Role &value)
     Permission = value;
 }
 
+QString Account::getName() const
+{
+    return name;
+}
+
+QString &Account::getName()
+{
+    return name;
+}
+
+void Account::setName(const QString &value)
+{
+    name = value;
+}
+
+QString Account::getAdress() const
+{
+    return adress;
+}
+
+QString &Account::getAdress()
+{
+    return adress;
+}
+
+void Account::setAdress(const QString &value)
+{
+    adress = value;
+}
+
+QString Account::getPhone_number() const
+{
+    return phone_number;
+}
+
+QString &Account::getPhone_number()
+{
+    return phone_number;
+}
+
+void Account::setPhone_number(const QString &value)
+{
+    phone_number = value;
+}
+
 QDataStream& operator<<(QDataStream& ostream, const Account& var)
 {
-    ostream << var.getLogin() << var.getPassword() << var.getPermission();
+    ostream << var.getLogin() << var.getPassword() << var.getPermission()
+            << var.getName() << var.getAdress() << var.getPhone_number();
+
+    ostream << var.result_table;
     return ostream;
 }
 QDataStream& operator>>(QDataStream& istream, Account& var)
 {
-    QString str = "QT";
     int r;
-    istream >> var.getLogin() >> var.getPassword() >> r;
+    istream >> var.getLogin() >> var.getPassword() >> r
+                              >> var.getName() >> var.getAdress() >> var.getPhone_number();
     var.setPermission(static_cast<Account::Role>(r));
-
+    istream >> var.result_table;
     return istream;
 }
 

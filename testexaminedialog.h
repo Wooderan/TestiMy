@@ -18,6 +18,8 @@ public:
     explicit TestExamineDialog(const Test& _test, QWidget *parent = nullptr);
     ~TestExamineDialog();
 
+    int getMark() const;
+
 protected slots:
     void check_results();
 private slots:
@@ -30,7 +32,8 @@ signals:
 private:
     Ui::TestExamineDialog *ui;
     QTimer *timer;
-    int score;
+    int mark;
+    int questions;
 };
 
 #endif // TESTEXAMINEDIALOG_H

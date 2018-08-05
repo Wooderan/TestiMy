@@ -58,6 +58,8 @@ void TestCreateDialog::on_accepted()
     QTimeEdit *time = ui->timeEdit;
     test.setTime(time->time());
 
+    test.setCategory(ui->lineEdit_category->text());
+
     QScrollArea *scroll = ui->scrollArea;
     if (scroll != nullptr) {
         QObjectList scrollChildren = scroll->takeWidget()->children();

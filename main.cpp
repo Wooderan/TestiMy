@@ -1,5 +1,6 @@
 ﻿#include "mainwindow.h"
 #include <QApplication>
+#include <QMessageBox>
 #include "test.h"
 #include "testitem.h"
 #include "testitemwidget.h"
@@ -7,13 +8,32 @@
 #include "testcreatedialog.h"
 #include "testitemcreatewidget.h"
 #include "authorizationdialog.h"
+#include "createwindow.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-//    MainWindow w;
-//    w.show();
+    AuthorizationDialog authorize;
+    Account acc;
+    if (authorize.exec() == QDialog::Accepted) {
+        acc = authorize.getCurr_account();
+        if (acc.getPermission() == Account::Teacher) {
+            CreateWindow w(acc);
+            w.show();
+            return a.exec();
+        }else{
+            MainWindow w(acc);
+            w.show();
+            return a.exec();
+        }
+    }
 
+//    TestCreateDialog dialog;
+//    dialog.exec();
+//    Test test = dialog.getTest();
+//    qDebug() << "";
+
+    return 0;
 //    TestItemCreateWidget widget;
 //    widget.show();
 //    a.exec();
@@ -44,11 +64,7 @@ int main(int argc, char *argv[])
 //    TestExamineDialog dialog(test2);
 //    return dialog.exec();
 
-    AuthorizationDialog authorize;
-    Account acc;
-    if (authorize.exec() == QDialog::Accepted) {
-        acc = authorize.getCurr_account();
-        qDebug() << "Good!";
-    }
+
+
 
 }

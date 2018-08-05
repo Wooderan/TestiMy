@@ -5,6 +5,7 @@
 
 #include <QRadioButton>
 #include <QDebug>
+#include <QMessageBox>
 #include "testitemcreatewidget.h"
 
 TestExamineDialog::TestExamineDialog(const Test &_test, QWidget *parent) :
@@ -28,7 +29,7 @@ TestExamineDialog::TestExamineDialog(const Test &_test, QWidget *parent) :
     ui->timer_edit->setTime(_test.getTime());
     ui->timer_edit->setDisplayFormat("hh:mm:ss");
     ui->timer_edit->setReadOnly(true);
-    score = 0;
+    mark = 0;
     timer = new QTimer(this);
     QObject::connect(timer, &QTimer::timeout, this, &TestExamineDialog::update_timer);
     timer->start(1000);
@@ -38,6 +39,7 @@ TestExamineDialog::TestExamineDialog(const Test &_test, QWidget *parent) :
 
     ui->label_Name->setText(_test.getName());
     ui->label_Description->setText(_test.getDescripton());
+    questions = static_cast<int>(_test.getN());
 }
 
 TestExamineDialog::~TestExamineDialog()
@@ -52,6 +54,7 @@ void TestExamineDialog::on_btn_Ok_clicked()
 
 void TestExamineDialog::check_results()
 {
+    int score = 0;
     this->timer->stop();
     QWidget *widget = ui->scrollArea->takeWidget();
     QVBoxLayout *layout = dynamic_cast<QVBoxLayout*>(widget->layout());
@@ -72,6 +75,18 @@ void TestExamineDialog::check_results()
 
     ui->scrollArea->setWidget(widget);
     ui->btn_Check->setEnabled(false);
+    ui->btn_Ok->setEnabled(true);
+
+//    double coef = static_cast<double>(questions) / 12;
+    double perc_coef = static_cast<double>(100) / questions;
+    double percent = static_cast<int>(perc_coef) * score;
+    mark = static_cast<int>(static_cast<double>(12) * (percent / 100));
+    QMessageBox::information(this, "Your results", QString("Right answers: %1\n"
+                                                           "Percentage of correct answers: %2%\n"
+                                                           "Mark: %3")
+                                                            .arg(score)
+                                                            .arg(percent)
+                                                            .arg(mark));
 }
 
 bool TestExamineDialog::check_question(TestItemWidget *_item)
@@ -101,4 +116,9 @@ void TestExamineDialog::update_timer()
         time.setHMS(time.addSecs(-1).hour(),time.addSecs(-1).minute(),time.addSecs(-1).second());
         ui->timer_edit->setTime(time);
     }
+}
+
+int TestExamineDialog::getMark() const
+{
+    return mark;
 }

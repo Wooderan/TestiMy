@@ -1,6 +1,7 @@
 #ifndef TEST_H
 #define TEST_H
 
+#include <QFileInfo>
 #include <QQuickItem>
 #include <QTime>
 #include "testitem.h"
@@ -13,6 +14,7 @@ protected:
     QList<TestItem> questions;
     QString name;
     QString descripton;
+    QString category;
     QTime time;
 public:
     Test();
@@ -35,13 +37,34 @@ public:
     QTime getTime()const;
     void setTime(const QTime &value);
 
-    bool Save();
+    QString& getCategory();
+    QString getCategory() const;
+    void setCategory(const QString &value);
+
+    bool Save() const;
     bool Load(QString _fileName);
+
+    friend QDataStream& operator<<(QDataStream& ostream, const Variant& var);
+    friend QDataStream& operator>>(QDataStream& istream, Variant& var);
+    friend QDataStream& operator<<(QDataStream& ostream, const TestItem& testitem);
+    friend QDataStream& operator>>(QDataStream& istream, TestItem& testitem);
+    friend QDataStream& operator<<(QDataStream& ostream, const Test& test);
+    friend QDataStream& operator>>(QDataStream& istream, Test& test);
+
+    friend bool operator==(const Test& _left, const Test& _right);
 
 signals:
 
 public slots:
 };
 Q_DECLARE_METATYPE( Test )
+
+class find_dir_name
+{
+    QString needle;
+public:
+    find_dir_name(QString _needle);
+    bool operator()(QFileInfo _info);
+};
 
 #endif // TEST_H

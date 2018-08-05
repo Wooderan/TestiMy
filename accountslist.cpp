@@ -2,6 +2,7 @@
 
 #include <QCoreApplication>
 #include <QDir>
+#include <cassert>
 
 AccountsList::AccountsList()
 {
@@ -34,6 +35,45 @@ bool AccountsList::checkPassword(const Account &_acc) const
 void AccountsList::addAccount(const Account &_acc)
 {
     accounts.push_back(_acc);
+}
+
+const Account &AccountsList::getAccount(QString _login) const
+{
+    auto it = std::find_if(accounts.begin(), accounts.end(), find_account_login(_login));
+    assert(it != accounts.end());
+    return *it;
+}
+
+void AccountsList::deleteAccount(const QString &_login)
+{
+    auto it = std::find_if(accounts.begin(), accounts.end(), find_account_login(_login));
+    accounts.erase(it);
+}
+
+int AccountsList::row(const QString &_login)
+{
+    int i;
+    for (i = 0; i < accounts.count(); i++) {
+        if (accounts[i].getLogin() == _login) break;
+    }
+    return i;
+}
+
+bool AccountsList::checkTeacher()
+{
+    bool teacher = false;
+    for (int i = 0; i < accounts.count(); i++) {
+        if (accounts[i].getPermission() == Account::Teacher){
+            teacher = true;
+            break;
+        }
+    }
+    return teacher;
+}
+
+int AccountsList::getN()const
+{
+    return accounts.count();
 }
 
 bool AccountsList::Save()

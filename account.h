@@ -10,6 +10,7 @@ class Account
 {
 public:
     enum Role{Teacher, Student};
+    static const QString RoleStr[];
     static const int NO_RESULT = -1;
 
     Account();
@@ -33,10 +34,25 @@ public:
     friend QDataStream& operator<<(QDataStream& ostream, const Account& var);
     friend QDataStream& operator>>(QDataStream& istream, Account& var);
 
+    QString getName() const;
+    QString& getName();
+    void setName(const QString &value);
+
+    QString getAdress() const;
+    QString& getAdress();
+    void setAdress(const QString &value);
+
+    QString getPhone_number() const;
+    QString& getPhone_number();
+    void setPhone_number(const QString &value);
+
 private:
     QString login;
     uint password;
     Role Permission;
+    QString name;
+    QString adress;
+    QString phone_number;
     QHash<QString, int> result_table;
 };
 

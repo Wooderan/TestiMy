@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>CreateWindow</class>
+ <widget class="QMainWindow" name="CreateWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,0">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0,0">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0,0,0">
       <item>
        <widget class="QLabel" name="label_accountInfo">
         <property name="text">
@@ -52,25 +52,52 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Make Test</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_4">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Change Test</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Delete Test</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QPushButton" name="pushButton_passTest">
           <property name="enabled">
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>Pass Test</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>Quit</string>
+           <string>Try Test</string>
           </property>
          </widget>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Quit</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -91,7 +118,20 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionChange_login_or_password"/>
+   <addaction name="separator"/>
+   <addaction name="actionManage_accounts"/>
   </widget>
+  <action name="actionChange_login_or_password">
+   <property name="text">
+    <string>Change login or password</string>
+   </property>
+  </action>
+  <action name="actionManage_accounts">
+   <property name="text">
+    <string>Manage accounts</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

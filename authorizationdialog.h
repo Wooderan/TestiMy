@@ -30,6 +30,7 @@ public:
     void setSubWidget(int id);
 
 public slots:
+    void accept();
 private:
     Ui::AuthorizationDialog *ui;
     QStackedWidget *widget;
