@@ -47,6 +47,7 @@ void CreateAccountForm::on_buttonBox_accepted()
             return;
         }
         acc.setPermission(Account::Teacher);
+        acc.setName("Teacher Teacherovich");
     }
     else{
         acc.setPermission(Account::Student);

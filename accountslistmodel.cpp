@@ -6,7 +6,7 @@
 #include "createaccountform.h"
 #include "changeaccountdialog.h"
 
-AccountsListModel::AccountsListModel(AccountsList* _list,QObject *parent) : QAbstractListModel(parent)
+AccountsListModel::AccountsListModel(AccountsList* _list,QObject *parent) : QAbstractTableModel(parent)
 {
     list = _list;
 //    list->Load();
@@ -24,6 +24,12 @@ int AccountsListModel::rowCount(const QModelIndex &parent) const
     return list->getN();
 }
 
+int AccountsListModel::columnCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent)
+    return 2;
+}
+
 QVariant AccountsListModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
@@ -33,7 +39,10 @@ QVariant AccountsListModel::data(const QModelIndex &index, int role) const
          return QVariant();
 
      if (role == Qt::DisplayRole)
-         return list->at(index.row()).getLogin();
+         if (index.column() == 0) {
+             return list->at(index.row()).getLogin();
+         }else
+             return list->at(index.row()).getName();
      else
          return QVariant();
 }
@@ -78,4 +87,20 @@ void AccountsListModel::changeAccount(const QString &_login)
     }
 
     delete dialog;
+}
+
+
+
+QVariant AccountsListModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (role != Qt::DisplayRole)
+             return QVariant();
+
+     if (orientation == Qt::Horizontal)
+         if (section == 0) {
+             return QString("Login");
+         }else
+             return QString("Name");
+     else
+         return QVariant();
 }

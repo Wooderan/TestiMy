@@ -10,6 +10,7 @@ ManageAccountsDialog::ManageAccountsDialog(QWidget *parent) :
     list->Load();
     model = new AccountsListModel(list, this);
     ui->listView->setModel(model);
+    ui->listView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 ManageAccountsDialog::~ManageAccountsDialog()
