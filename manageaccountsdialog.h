@@ -2,6 +2,7 @@
 #define MANAGEACCOUNTSDIALOG_H
 
 #include <QDialog>
+#include <QItemSelection>
 #include "accountslistmodel.h"
 #include "accountslist.h"
 
@@ -17,6 +18,8 @@ public:
     explicit ManageAccountsDialog(QWidget *parent = nullptr);
     ~ManageAccountsDialog();
 
+public slots:
+    void selection_handler(const QItemSelection &selected, const QItemSelection &deselected);
 private slots:
     void on_pushButton_create_clicked();
 

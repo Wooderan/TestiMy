@@ -89,6 +89,13 @@ void AccountsListModel::changeAccount(const QString &_login)
     delete dialog;
 }
 
+lookup_account_results AccountsListModel::getStatistic(const QModelIndex &index)
+{
+    lookup_account_results stat;
+    stat(list->at(index.row()));
+    return stat;
+}
+
 
 
 QVariant AccountsListModel::headerData(int section, Qt::Orientation orientation, int role) const

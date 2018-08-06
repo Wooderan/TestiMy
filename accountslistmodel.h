@@ -20,6 +20,7 @@ public:
     void deleteAccount(const QString& _login);
     void createAccount();
     void changeAccount(const QString& _login);
+    lookup_account_results getStatistic(const QModelIndex &index);
 
 private:
     AccountsList *list;

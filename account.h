@@ -26,9 +26,9 @@ public:
 
 
     int getResult(QString _name) const;
-    QMap<QString, int>::iterator begin();
-    QMap<QString, int>::iterator end();
-    QMap<QString, int>& getMap();
+    QMap<QString, int>::const_iterator begin()const;
+    QMap<QString, int>::const_iterator end()const;
+    const QMap<QString, int> &getMap() const;
     void setResult(QString _name, int _points);
 
     Role getPermission() const;
@@ -90,7 +90,7 @@ public:
 
     QMap<QString, int> getPassedTests() const;
 
-    bool operator()(Account& _acc);
+    bool operator()(const Account& _acc);
 
     QString formLabale();
     double getAvarageMark() const;

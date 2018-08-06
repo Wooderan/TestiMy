@@ -49,18 +49,18 @@ int Account::getResult(QString _name) const
     return NO_RESULT;
 }
 
-QMap<QString, int>::iterator Account::begin()
+QMap<QString, int>::const_iterator Account::begin()const
 {
-    return result_table.begin();
+    return result_table.cbegin();
 }
 
-QMap<QString, int>::iterator Account::end()
+QMap<QString, int>::const_iterator Account::end()const
 {
     return result_table.end();
 
 }
 
-QMap<QString, int> &Account::getMap()
+const QMap<QString, int> &Account::getMap()const
 {
     return result_table;
 }
@@ -193,7 +193,7 @@ QMap<QString,int> lookup_account_results::getPassedTests() const
     return passedTests;
 }
 
-bool lookup_account_results::operator()(Account &_acc)
+bool lookup_account_results::operator()(const Account &_acc)
 {
     for (auto i = _acc.begin(); i != _acc.end(); i++) {
         count++;
