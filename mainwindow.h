@@ -28,6 +28,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Account account;
+    lookup_account_results statistic;
     TestListModel *tests;
 };
 

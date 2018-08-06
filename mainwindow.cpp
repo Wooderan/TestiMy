@@ -31,7 +31,8 @@ MainWindow::MainWindow(const Account &_account, QWidget *parent) :
     QItemSelectionModel *selection = ui->listView_tests->selectionModel();
     QObject::connect(selection, &QItemSelectionModel::selectionChanged, this, &MainWindow::test_change);
 
-
+    statistic(account);
+    ui->label_testInfo->setText(statistic.formLabale());
 }
 
 MainWindow::~MainWindow()
@@ -101,7 +102,6 @@ void MainWindow::on_pushButton_passTest_clicked()
             list.deleteAccount(account.getLogin());
             list.addAccount(account);
             list.Save();
-            list.Load();
         }
 
     }

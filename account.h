@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QHash>
+#include <QMap>
 
 
 
@@ -25,6 +26,9 @@ public:
 
 
     int getResult(QString _name) const;
+    QMap<QString, int>::iterator begin();
+    QMap<QString, int>::iterator end();
+    QMap<QString, int>& getMap();
     void setResult(QString _name, int _points);
 
     Role getPermission() const;
@@ -53,7 +57,7 @@ private:
     QString name;
     QString adress;
     QString phone_number;
-    QHash<QString, int> result_table;
+    QMap<QString, int> result_table;
 };
 
 class find_account_login
@@ -70,5 +74,33 @@ class find_account_password
 public:
     find_account_password(uint _pass);
     bool operator()(const Account& _acc);
+};
+
+class lookup_account_results
+{
+public:
+    lookup_account_results();
+    int getCount() const;
+
+    int getExcelent() const;
+
+    int getAvarage() const;
+
+    int getBad() const;
+
+    QMap<QString, int> getPassedTests() const;
+
+    bool operator()(Account& _acc);
+
+    QString formLabale();
+    double getAvarageMark() const;
+
+private:
+    int count;
+    int excelent_r;
+    int avarage_r;
+    int bad_r;
+    int sum;
+    QMap<QString, int> passedTests;
 };
 #endif // ACCOUNT_H

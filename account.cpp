@@ -49,6 +49,22 @@ int Account::getResult(QString _name) const
     return NO_RESULT;
 }
 
+QMap<QString, int>::iterator Account::begin()
+{
+    return result_table.begin();
+}
+
+QMap<QString, int>::iterator Account::end()
+{
+    return result_table.end();
+
+}
+
+QMap<QString, int> &Account::getMap()
+{
+    return result_table;
+}
+
 Account::Role Account::getPermission() const
 {
     return Permission;
@@ -141,4 +157,76 @@ find_account_login::find_account_login(QString _login):login(_login){}
 bool find_account_login::operator()(const Account &_acc){
     if (_acc.getLogin() == login) return true;
     return false;
+}
+
+lookup_account_results::lookup_account_results()
+{
+    count = 0;
+    excelent_r = 0;
+    avarage_r = 0;
+    bad_r = 0;
+    sum = 0;
+}
+
+int lookup_account_results::getCount() const
+{
+    return count;
+}
+
+int lookup_account_results::getExcelent() const
+{
+    return excelent_r;
+}
+
+int lookup_account_results::getAvarage() const
+{
+    return avarage_r;
+}
+
+int lookup_account_results::getBad() const
+{
+    return bad_r;
+}
+
+QMap<QString,int> lookup_account_results::getPassedTests() const
+{
+    return passedTests;
+}
+
+bool lookup_account_results::operator()(Account &_acc)
+{
+    for (auto i = _acc.begin(); i != _acc.end(); i++) {
+        count++;
+        sum += *i;
+        if (*i > 9)
+            excelent_r++;
+        else if(*i > 6)
+            avarage_r++;
+        else
+            bad_r++;
+    }
+    if (passedTests.isEmpty()) {
+        passedTests = _acc.getMap();
+    }
+    return false;
+}
+
+QString lookup_account_results::formLabale()
+{
+    return QString("Passed tests: %1\n"
+                          "Excellent results: %2\n"
+                          "Avarage results: %3\n"
+                          "Bad results: %4\n"
+                          "Avarage mark: %5")
+                            .arg(count)
+                            .arg(excelent_r)
+                            .arg(avarage_r)
+                            .arg(bad_r)
+            .arg(getAvarageMark());
+}
+
+double lookup_account_results::getAvarageMark() const
+{
+    if (count == 0) return 0;
+    else return static_cast<double>(sum)/count;
 }
