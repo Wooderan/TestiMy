@@ -53,6 +53,7 @@ void AccountsListModel::deleteAccount(const QString &_login)
     beginRemoveRows(QModelIndex(), i,i);
     list->deleteAccount(_login);
     endRemoveRows();
+    list->Save();
 }
 
 void AccountsListModel::createAccount()
@@ -84,6 +85,7 @@ void AccountsListModel::changeAccount(const QString &_login)
         beginInsertRows(QModelIndex(), n,n);
         list->addAccount(dialog->getAcc());
         endInsertRows();
+        list->Save();
     }
 
     delete dialog;

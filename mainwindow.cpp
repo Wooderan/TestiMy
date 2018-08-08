@@ -14,7 +14,7 @@ MainWindow::MainWindow(const Account &_account, QWidget *parent) :
     ui->setupUi(this);
 
     //filling listview and model
-    tests = new TestListModel(this);
+    tests = new TestListModel(this, &account);
     ui->listView_tests->setModel(tests);
 
     //filling account info
@@ -33,6 +33,7 @@ MainWindow::MainWindow(const Account &_account, QWidget *parent) :
 
     statistic(account);
     ui->label_testInfo->setText(statistic.formLabale());
+    ui->listView_tests->header()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 MainWindow::~MainWindow()
@@ -75,7 +76,7 @@ void MainWindow::test_change(const QItemSelection &selected, const QItemSelectio
 
 void MainWindow::on_pushButton_passTest_clicked()
 {
-
+    QModelIndex idx = ui->listView_tests->selectionModel()->currentIndex();
     TreeCategory* category = static_cast<TreeCategory*>(ui->listView_tests->selectionModel()->currentIndex().internalPointer());
     if (category->isCategory()) return;
     Test test = category->getTest();
@@ -102,6 +103,9 @@ void MainWindow::on_pushButton_passTest_clicked()
             list.deleteAccount(account.getLogin());
             list.addAccount(account);
             list.Save();
+            tests->dataChanged(idx,tests->secondColumn(idx));
+//            QModelIndex idx2 = tests->secondColumn(idx);
+//            QString str = qvariant_cast<QString>(tests->data(tests->secondColumn(idx),Qt::DisplayRole));
         }
 
     }

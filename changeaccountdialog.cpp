@@ -20,37 +20,52 @@ ChangeAccountDialog::~ChangeAccountDialog()
     delete ui;
 }
 
-void ChangeAccountDialog::on_buttonBox_accepted()
+Account ChangeAccountDialog::getAcc() const
 {
-    if (ui->lineEdit_login->text().isEmpty())
-        QMessageBox::critical(this, "Error", "Login field is empty");
-    acc.setLogin(ui->lineEdit_login->text());
-
-    if (ui->lineEdit_password->text().isEmpty())
-        QMessageBox::critical(this, "Error", "Password field is empty");
-    acc.setPassword(ui->lineEdit_password->text());
-
-    if (ui->lineEdit_name->text().isEmpty())
-        QMessageBox::critical(this, "Error", "Name field is empty");
-    acc.setName(ui->lineEdit_name->text());
-
-    if (ui->lineEdit_adress->text().isEmpty())
-        QMessageBox::critical(this, "Error", "Adress field is empty");
-    acc.setAdress(ui->lineEdit_adress->text());
-
-    if (ui->lineEdit_phoneNumber->text().isEmpty())
-        QMessageBox::critical(this, "Error", "Phone number field is empty");
-    acc.setPhone_number(ui->lineEdit_phoneNumber->text());
-
-    QDialog::accept();
+    return acc;
 }
 
-void ChangeAccountDialog::on_buttonBox_rejected()
+void ChangeAccountDialog::on_pushButton_cancel_clicked()
 {
     QDialog::reject();
 }
 
-Account ChangeAccountDialog::getAcc() const
+void ChangeAccountDialog::on_pushButton_change_clicked()
 {
-    return acc;
+    if (ui->lineEdit_login->text().isEmpty())
+    {
+        QMessageBox::critical(this, "Error", "Login field is empty");
+        return;
+    }
+    acc.setLogin(ui->lineEdit_login->text());
+
+    if (ui->lineEdit_password->text().isEmpty())
+    {
+        QMessageBox::critical(this, "Error", "Password field is empty");
+        return;
+    }
+    acc.setPassword(ui->lineEdit_password->text());
+
+    if (ui->lineEdit_name->text().isEmpty())
+    {
+        QMessageBox::critical(this, "Error", "Name field is empty");
+        return;
+    }
+    acc.setName(ui->lineEdit_name->text());
+
+    if (ui->lineEdit_adress->text().isEmpty())
+    {
+        QMessageBox::critical(this, "Error", "Adress field is empty");
+        return;
+    }
+    acc.setAdress(ui->lineEdit_adress->text());
+
+    if (ui->lineEdit_phoneNumber->text().isEmpty())
+    {
+        QMessageBox::critical(this, "Error", "Phone number field is empty");
+        return;
+    }
+    acc.setPhone_number(ui->lineEdit_phoneNumber->text());
+
+    QDialog::accept();
 }

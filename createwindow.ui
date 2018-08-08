@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,0">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,3">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0,0,0">
       <item>
@@ -57,14 +57,14 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="pushButton_make">
           <property name="text">
            <string>Make Test</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="pushButton_change">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -74,7 +74,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="pushButton_delete">
           <property name="enabled">
            <bool>false</bool>
           </property>

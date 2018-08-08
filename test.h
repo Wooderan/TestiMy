@@ -43,6 +43,7 @@ public:
 
     bool Save() const;
     bool Load(QString _fileName);
+    bool Delete() const;
 
     friend QDataStream& operator<<(QDataStream& ostream, const Variant& var);
     friend QDataStream& operator>>(QDataStream& istream, Variant& var);

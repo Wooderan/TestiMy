@@ -65,6 +65,14 @@ void TestItemCreateWidget::deleteLine()
     delete pb;
     delete rb;
     delete le;
+    QObjectList list = this->children();
+    foreach (QObject *const obj, list) {
+        rb = dynamic_cast<MyRadioButton *>(obj);
+        if (rb != nullptr) {
+            rb->setChecked(true);
+            break;
+        }
+    }
 }
 
 

@@ -2,8 +2,9 @@
 
 #include <QDir>
 
-TestListModel::TestListModel(QObject *parent) : QAbstractItemModel(parent)
+TestListModel::TestListModel(QObject *parent, const Account *_acc) : QAbstractItemModel(parent)
 {
+    acc = _acc;
     root = new TreeCategory();
     Load();
 }
@@ -52,7 +53,9 @@ void TestListModel::appendTest(const Test &_test)
     }
 
     if (!idx.isValid()) {
+        beginInsertRows(QModelIndex(),1,1);
         root->appendChild(new TreeCategory(_category, root));
+        endInsertRows();
         n = root->childCount();
         for (int i = 0; i < n ; i++) {
             if (root->child(i)->data(0) == _category) {
@@ -67,6 +70,26 @@ void TestListModel::appendTest(const Test &_test)
     endInsertRows();
 }
 
+void TestListModel::deleteTest(const Test &_test)
+{
+    int n = root->childCount();
+    QModelIndex idx = QModelIndex();
+    QString _category = _test.getCategory();
+    for (int i = 0; i < n ; i++) {
+        if (root->child(i)->data(0) == _category) {
+            idx = index(i,0,QModelIndex());
+        }
+    }
+
+    if (idx.isValid()) {
+        TreeCategory* parentCategory = static_cast<TreeCategory*>(idx.internalPointer());
+        beginRemoveRows(idx,1,1);
+        parentCategory->deleteChild(_test.getName());
+        endRemoveRows();
+        _test.Delete();
+    }
+}
+
 
 QVariant TestListModel::data(const QModelIndex &index, int role) const
 {
@@ -77,6 +100,16 @@ QVariant TestListModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     TreeCategory* category = static_cast<TreeCategory*>(index.internalPointer());
+    if (acc != nullptr && index.column() == 1) {
+        if (category->isCategory()) {
+            return QString();
+        }else{
+            int score = acc->getResult(category->getTest().getName());
+            if (score == Account::NO_RESULT)
+                return QString("Not passed");
+            else return QString::number(score);
+        }
+    }
     return category->data(index.column());
 }
 
@@ -128,6 +161,9 @@ int TestListModel::rowCount(const QModelIndex &parent) const
 
 int TestListModel::columnCount(const QModelIndex &parent) const
 {
+    if (acc != nullptr)
+        return 2;
+
     if (parent.isValid())
         return static_cast<TreeCategory*>(parent.internalPointer())->columnCount();
     else
@@ -139,4 +175,24 @@ Qt::ItemFlags TestListModel::flags(const QModelIndex &index) const
     if (!index.isValid()) return 0;
 
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+}
+
+
+QVariant TestListModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (role != Qt::DisplayRole)
+             return QVariant();
+
+     if (orientation == Qt::Horizontal)
+         if (section == 0) {
+             return QString("Category/Test");
+         }else
+             return QString("Score");
+     else
+         return QVariant();
+}
+
+QModelIndex TestListModel::secondColumn(const QModelIndex &_item)
+{
+    return createIndex(_item.row(), 1, _item.internalPointer());
 }

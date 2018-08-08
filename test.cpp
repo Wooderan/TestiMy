@@ -149,6 +149,23 @@ bool Test::Load(QString _fileName)
     return true;
 }
 
+bool Test::Delete() const
+{
+    QDir Dir(QCoreApplication::applicationDirPath());
+    if(!Dir.exists()) return false;
+    QFileInfoList list = Dir.entryInfoList();
+    auto it = std::find_if(list.begin(),list.end(), find_dir_name(DEFAULT_DIR_NAME));
+    if (it == list.end()) //we dont find default tests folder
+        return false;
+    Dir.cd(DEFAULT_DIR_NAME);
+
+    QString test_file_name = QString("%1/%2.testimy").arg(Dir.path()).arg(this->getName());
+    if (Dir.remove(test_file_name))
+        return true;
+    else
+        return false;
+}
+
 bool operator==(const Test &_left, const Test &_right)
 {
     if (_left.name != _right.name) return false;

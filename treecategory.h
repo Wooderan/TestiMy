@@ -11,6 +11,7 @@ public:
     ~TreeCategory();
 
     void appendChild(TreeCategory* child);
+    void deleteChild(const QString &_testName);
 
     TreeCategory* child(int row);
     int childCount()const;

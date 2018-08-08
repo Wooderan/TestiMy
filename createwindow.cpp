@@ -57,16 +57,17 @@ void CreateWindow::test_change(const QItemSelection &selected, const QItemSelect
     ui->label_testInfo->setText(QString("Subject:%1\n"
                                         "Description:%2\n"
                                         "Time:%3\n"
-                                        "Questions:%4\n"
-                                        "Best result:%5")
+                                        "Questions:%4\n")
                                         .arg(test.getName())
                                         .arg(test.getDescripton())
                                         .arg(test.getTime().toString())
-                                        .arg(test.getN())
-                                        .arg(bestResult));
+                                        .arg(test.getN()));
 
     if (!ui->pushButton_passTest->isEnabled())
         ui->pushButton_passTest->setEnabled(true);
+    if (!ui->pushButton_delete->isEnabled())
+        ui->pushButton_delete->setEnabled(true);
+
 }
 
 void CreateWindow::on_pushButton_passTest_clicked()
@@ -81,16 +82,6 @@ void CreateWindow::on_pushButton_passTest_clicked()
 void CreateWindow::on_pushButton_clicked()
 {
     this->close();
-}
-
-void CreateWindow::on_pushButton_2_clicked()
-{
-    TestCreateDialog *dialog = new TestCreateDialog(this);
-    if (dialog->exec() == QDialog::Accepted) {
-        const Test& test = dialog->getTest();
-        tests->appendTest(test);
-        test.Save();
-    }
 }
 
 void CreateWindow::on_actionChange_login_or_password_triggered()
@@ -109,4 +100,25 @@ void CreateWindow::on_actionManage_accounts_triggered()
 {
     ManageAccountsDialog *dialog = new ManageAccountsDialog(this);
     dialog->exec();
+}
+
+void CreateWindow::on_pushButton_make_clicked()
+{
+    TestCreateDialog *dialog = new TestCreateDialog(this);
+    if (dialog->exec() == QDialog::Accepted) {
+        const Test& test = dialog->getTest();
+        tests->appendTest(test);
+        test.Save();
+    }
+}
+
+void CreateWindow::on_pushButton_delete_clicked()
+{
+    TreeCategory* category = static_cast<TreeCategory*>(ui->listView_tests->selectionModel()->currentIndex().internalPointer());
+    if (category->isCategory()){
+
+    }else{
+        Test test = category->getTest();
+        tests->deleteTest(test);
+    }
 }

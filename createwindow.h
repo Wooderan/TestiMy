@@ -25,11 +25,13 @@ private slots:
 
     void on_pushButton_clicked();
 
-    void on_pushButton_2_clicked();
-
     void on_actionChange_login_or_password_triggered();
 
     void on_actionManage_accounts_triggered();
+
+    void on_pushButton_make_clicked();
+
+    void on_pushButton_delete_clicked();
 
 private:
     Ui::CreateWindow *ui;

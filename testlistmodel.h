@@ -4,12 +4,13 @@
 #include <QAbstractItemModel>
 #include "test.h"
 #include "treecategory.h"
+#include "account.h"
 
 class TestListModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    explicit TestListModel(QObject *parent = nullptr);
+    explicit TestListModel(QObject *parent = nullptr,const Account* _acc = nullptr);
     ~TestListModel();
 
     // QAbstractItemModel interface
@@ -19,13 +20,18 @@ public:
     QModelIndex parent(const QModelIndex &child) const;
     int columnCount(const QModelIndex &parent) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    QModelIndex secondColumn(const QModelIndex &_item);
 
 //    bool Save();
     bool Load();
     void appendTest(const Test &_test);
+    void deleteTest(const Test &_test);
 
 private:
     TreeCategory *root;
+    const Account *acc;
+
 };
 
 #endif // TESTLISTMODEL_H

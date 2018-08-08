@@ -24,6 +24,27 @@ void TreeCategory::appendChild(TreeCategory *child)
     children.append(child);
 }
 
+class find_test_name{
+    QString test_name;
+public:
+    find_test_name(const QString &_testName):test_name(_testName){}
+    bool operator()(TreeCategory* _tree){
+        if (_tree->getTest().getName() == test_name)
+            return true;
+        return false;
+    }
+};
+
+void TreeCategory::deleteChild(const QString &_testName)
+{
+    auto it = std::find_if(children.begin(), children.end(), find_test_name(_testName));
+    if (it == children.end())
+        return;
+    TreeCategory* tmp = *it;
+    children.erase(it);
+    delete tmp;
+}
+
 TreeCategory *TreeCategory::child(int row)
 {
     return children.value(row);
