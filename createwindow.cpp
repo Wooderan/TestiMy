@@ -6,6 +6,8 @@
 #include "accountslist.h"
 #include "manageaccountsdialog.h"
 
+#include <QFileDialog>
+
 
 CreateWindow::CreateWindow(const Account &_account, QWidget *parent) :
     QMainWindow(parent),
@@ -49,6 +51,8 @@ void CreateWindow::test_change(const QItemSelection &selected, const QItemSelect
             ui->pushButton_delete->setEnabled(false);
         if (ui->pushButton_change->isEnabled())
             ui->pushButton_change->setEnabled(false);
+        if (ui->pushButton_export->isEnabled())
+            ui->pushButton_export->setEnabled(false);
         return;
     }
 
@@ -77,6 +81,8 @@ void CreateWindow::test_change(const QItemSelection &selected, const QItemSelect
         ui->pushButton_delete->setEnabled(true);
     if (!ui->pushButton_change->isEnabled())
         ui->pushButton_change->setEnabled(true);
+    if (!ui->pushButton_export->isEnabled())
+        ui->pushButton_export->setEnabled(true);
 
 }
 
@@ -145,4 +151,17 @@ void CreateWindow::on_pushButton_change_clicked()
         tests->appendTest(test);
         test.Save();
     }
+}
+
+void CreateWindow::on_pushButton_export_clicked()
+{
+    TreeCategory* current = tests->getItem(ui->listView_tests->selectionModel()->currentIndex());
+    if (current->isCategory()) return;
+    Test test = current->getTest();
+    QString test_file_name = QFileDialog::getExistingDirectory(this, "Choose Directory to export",
+                                                               "",
+                                                               QFileDialog::ShowDirsOnly
+                                                               | QFileDialog::DontResolveSymlinks);
+    test_file_name += "/" + test.getName() + ".txt";
+    test.Export(test_file_name);
 }

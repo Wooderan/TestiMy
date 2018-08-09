@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,3">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0,0,0">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,1,0,0,0,0">
       <item>
        <widget class="QLabel" name="label_accountInfo">
         <property name="text">
@@ -94,6 +94,13 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_export">
+        <property name="text">
+         <string>Export Test</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton">

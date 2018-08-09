@@ -1,5 +1,6 @@
 #include "test.h"
 #include <QDir>
+#include <QFileDialog>
 #include <cassert>
 
 QString &Test::getName()
@@ -105,6 +106,24 @@ QDataStream& operator>>(QDataStream& istream, Test& test)
     }
     return istream;
 }
+QTextStream& operator<<(QTextStream& ostream, const Test& test)
+{
+    ostream <<"Test: "<< test.getName() << "\n"
+            <<"Description: "<< test.getDescripton()<<"\n"
+            <<"Time: "<< test.getTime().toString()<<"\n"
+            <<"Category: "<< test.getCategory() <<"\n\n";
+    ostream <<"Questions: "<< static_cast<int>(test.getN()) << '\n';
+    for (size_t i = 0; i < test.getN(); i++) {
+        TestItem item = test.at(i);
+        ostream <<i+1<<") "<< item.getQuestion()<<'\n';
+        for (size_t y = 0; y < item.getN(); y++) {
+            Variant var = item.at(y);
+            ostream <<'\t'<< QChar(0x25A1) << var.answer << '\n';
+        }
+        ostream << '\n';
+    }
+    return ostream;
+}
 
 bool Test::Save() const
 {
@@ -125,6 +144,18 @@ bool Test::Save() const
     test_stream << *this;
 //    QTextStream test_stream(&test_file);
 //    test_stream << *this;
+    test_file.close();
+    return true;
+}
+
+bool Test::Export(const QString &test_file_name) const
+{
+
+    QFile test_file(test_file_name);
+    if (!test_file.open(QIODevice::WriteOnly | QIODevice::Text)) return false;
+
+    QTextStream test_stream(&test_file);
+    test_stream << *this;
     test_file.close();
     return true;
 }

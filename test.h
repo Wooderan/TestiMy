@@ -42,6 +42,7 @@ public:
     void setCategory(const QString &value);
 
     bool Save() const;
+    bool Export(const QString &test_file_name) const;
     bool Load(QString _fileName);
     bool Delete() const;
 
