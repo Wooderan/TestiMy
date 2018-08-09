@@ -33,6 +33,8 @@ private slots:
 
     void on_pushButton_delete_clicked();
 
+    void on_pushButton_change_clicked();
+
 private:
     Ui::CreateWindow *ui;
     Account account;

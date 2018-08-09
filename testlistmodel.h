@@ -22,6 +22,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     QModelIndex secondColumn(const QModelIndex &_item);
+    TreeCategory* getItem(const QModelIndex& _indx);
 
 //    bool Save();
     bool Load();

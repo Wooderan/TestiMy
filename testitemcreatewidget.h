@@ -67,7 +67,7 @@ class TestItemCreateWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit TestItemCreateWidget(QWidget *parent = nullptr);
+    explicit TestItemCreateWidget(QWidget *parent = nullptr, const TestItem *_item = nullptr);
     ~TestItemCreateWidget();
 
     TestItem getItem() const;

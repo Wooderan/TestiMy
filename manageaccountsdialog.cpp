@@ -1,5 +1,6 @@
 #include "manageaccountsdialog.h"
 #include "ui_manageaccountsdialog.h"
+#include "accountsstatsdialog.h"
 
 ManageAccountsDialog::ManageAccountsDialog(QWidget *parent) :
     QDialog(parent),
@@ -10,6 +11,7 @@ ManageAccountsDialog::ManageAccountsDialog(QWidget *parent) :
     list->Load();
     model = new AccountsListModel(list, this);
     ui->listView->setModel(model);
+    ui->listView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->listView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     QItemSelectionModel *selection = ui->listView->selectionModel();
     QObject::connect(selection, &QItemSelectionModel::selectionChanged, this, &ManageAccountsDialog::selection_handler);
@@ -30,7 +32,9 @@ void ManageAccountsDialog::selection_handler(const QItemSelection &selected, con
     Q_UNUSED(selected)
     Q_UNUSED(deselected)
     lookup_account_results stats = model->getStatistic(ui->listView->selectionModel()->currentIndex());
+
     ui->label->setText(stats.formLabale());
+    ui->pushButton_stats->setEnabled(true);
 }
 
 void ManageAccountsDialog::on_pushButton_delete_clicked()
@@ -47,4 +51,10 @@ void ManageAccountsDialog::on_pushButton_change_clicked()
     if (!selection->hasSelection()) return;
     QString login = qvariant_cast<QString>(model->data(selection->currentIndex(), Qt::DisplayRole));
     model->changeAccount(login);
+}
+
+void ManageAccountsDialog::on_pushButton_stats_clicked()
+{
+    AccountsStatsDialog* dialog = new AccountsStatsDialog(model->getAccount(ui->listView->selectionModel()->currentIndex()), this);
+    dialog->exec();
 }

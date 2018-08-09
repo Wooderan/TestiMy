@@ -13,7 +13,7 @@ class TestCreateDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit TestCreateDialog(QWidget *parent = nullptr);
+    explicit TestCreateDialog(QWidget *parent = nullptr, const Test *_test = nullptr);
     ~TestCreateDialog();
 
     Test getTest() const;

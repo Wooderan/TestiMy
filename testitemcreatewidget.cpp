@@ -5,11 +5,34 @@
 #include <QDebug>
 #include <QRadioButton>
 
-TestItemCreateWidget::TestItemCreateWidget(QWidget *parent) :
+TestItemCreateWidget::TestItemCreateWidget(QWidget *parent, const TestItem *_item) :
     QWidget(parent),
     ui(new Ui::TestItemCreateWidget)
 {
     ui->setupUi(this);
+    if (_item != nullptr) {
+        ui->text_question->setText(_item->getQuestion());
+        for (size_t i = 0; i < _item->getN(); i++) {
+            Variant var = _item->at(i);
+            MyRadioButton *rb = new MyRadioButton(this);
+            rb->setChecked(var.correct);
+            QLineEdit *le = new QLineEdit(this);
+            le->setText(var.answer);
+            MyPushButton *pb = new MyPushButton(this);
+            QObject::connect(pb, &MyPushButton::clicked, this, &TestItemCreateWidget::deleteLine);
+            pb->setText("X");
+            rb->setRespond_line(le);
+            pb->setRespond_line(le);
+            pb->setRespond_btn(rb);
+            QSizePolicy policy(QSizePolicy::Preferred,QSizePolicy::Fixed);
+            policy.setHorizontalStretch(1);
+            le->setSizePolicy(policy);
+            int row = ui->formVariants->rowCount();
+            ui->formVariants->addWidget(rb, row, 0);
+            ui->formVariants->addWidget(le, row, 1);
+            ui->formVariants->addWidget(pb, row, 2);
+        }
+    }
 }
 
 TestItemCreateWidget::~TestItemCreateWidget()

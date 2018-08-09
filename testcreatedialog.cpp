@@ -5,13 +5,30 @@
 #include <QScrollBar>
 #include <QTimeEdit>
 
-TestCreateDialog::TestCreateDialog(QWidget *parent) :
+TestCreateDialog::TestCreateDialog(QWidget *parent, const Test *_test) :
     QDialog(parent),
     ui(new Ui::TestCreateDialog)
 {
     ui->setupUi(this);
     QObject::connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &TestCreateDialog::on_accepted);
     ui->timeEdit->setDisplayFormat("hh:mm:ss");
+    if (_test) {
+        ui->lineEdit_name->setText(_test->getName());
+        ui->textEdit_description->setText(_test->getDescripton());
+        ui->lineEdit_category->setText(_test->getCategory());
+        ui->timeEdit->setTime(_test->getTime());
+        size_t n = _test->getN();
+        for (size_t i = 0; i < n; i++) {
+            TestItem item = _test->at(i);
+            TestItemCreateWidget *itemWidget = new TestItemCreateWidget(this, &item);
+            QWidget* widget = ui->scrollArea->widget();
+            QLayout* layout = widget->layout();
+            if (layout == nullptr) {
+                layout = new QVBoxLayout(widget);
+            }
+            layout->addWidget(itemWidget);
+        }
+    }
 }
 
 TestCreateDialog::~TestCreateDialog()

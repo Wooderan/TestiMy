@@ -98,6 +98,11 @@ lookup_account_results AccountsListModel::getStatistic(const QModelIndex &index)
     return stat;
 }
 
+const Account &AccountsListModel::getAccount(const QModelIndex &index)
+{
+    return list->at(index.row());
+}
+
 
 
 QVariant AccountsListModel::headerData(int section, Qt::Orientation orientation, int role) const

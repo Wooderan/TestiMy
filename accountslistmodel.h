@@ -21,6 +21,7 @@ public:
     void createAccount();
     void changeAccount(const QString& _login);
     lookup_account_results getStatistic(const QModelIndex &index);
+    const Account& getAccount(const QModelIndex &index);
 
 private:
     AccountsList *list;

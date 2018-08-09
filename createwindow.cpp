@@ -42,7 +42,15 @@ void CreateWindow::test_change(const QItemSelection &selected, const QItemSelect
     QModelIndexList indexList = selected.indexes();
     // we always will have only one selected item
     TreeCategory* category = static_cast<TreeCategory*>(indexList[0].internalPointer());
-    if (category->isCategory()) return;
+    if (category->isCategory()) {
+        if (ui->pushButton_passTest->isEnabled())
+            ui->pushButton_passTest->setEnabled(false);
+        if (ui->pushButton_delete->isEnabled())
+            ui->pushButton_delete->setEnabled(false);
+        if (ui->pushButton_change->isEnabled())
+            ui->pushButton_change->setEnabled(false);
+        return;
+    }
 
     Test test = category->getTest();
 
@@ -67,6 +75,8 @@ void CreateWindow::test_change(const QItemSelection &selected, const QItemSelect
         ui->pushButton_passTest->setEnabled(true);
     if (!ui->pushButton_delete->isEnabled())
         ui->pushButton_delete->setEnabled(true);
+    if (!ui->pushButton_change->isEnabled())
+        ui->pushButton_change->setEnabled(true);
 
 }
 
@@ -120,5 +130,19 @@ void CreateWindow::on_pushButton_delete_clicked()
     }else{
         Test test = category->getTest();
         tests->deleteTest(test);
+    }
+}
+
+void CreateWindow::on_pushButton_change_clicked()
+{
+    TreeCategory* current = tests->getItem(ui->listView_tests->selectionModel()->currentIndex());
+    Test test = current->getTest();
+    TestCreateDialog *dialog = new TestCreateDialog(this, &test);
+    if (dialog->exec() == QDialog::Accepted) {
+        tests->deleteTest(test);
+        test.Delete();
+        test = dialog->getTest();
+        tests->appendTest(test);
+        test.Save();
     }
 }

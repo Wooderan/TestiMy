@@ -42,7 +42,8 @@ SOURCES += \
     changepassworddialog.cpp \
     manageaccountsdialog.cpp \
     accountslistmodel.cpp \
-    changeaccountdialog.cpp
+    changeaccountdialog.cpp \
+    accountsstatsdialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -64,7 +65,8 @@ HEADERS += \
     changepassworddialog.h \
     manageaccountsdialog.h \
     accountslistmodel.h \
-    changeaccountdialog.h
+    changeaccountdialog.h \
+    accountsstatsdialog.h
 
 FORMS += \
         mainwindow.ui \
@@ -77,7 +79,8 @@ FORMS += \
     createwindow.ui \
     changepassworddialog.ui \
     manageaccountsdialog.ui \
-    changeaccountdialog.ui
+    changeaccountdialog.ui \
+    accountsstatsdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

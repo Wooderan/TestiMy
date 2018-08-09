@@ -53,7 +53,7 @@ void TestListModel::appendTest(const Test &_test)
     }
 
     if (!idx.isValid()) {
-        beginInsertRows(QModelIndex(),1,1);
+        beginInsertRows(QModelIndex(),0,0);
         root->appendChild(new TreeCategory(_category, root));
         endInsertRows();
         n = root->childCount();
@@ -65,7 +65,7 @@ void TestListModel::appendTest(const Test &_test)
     }
 
     TreeCategory* parentCategory = static_cast<TreeCategory*>(idx.internalPointer());
-    beginInsertRows(idx, 1,1);
+    beginInsertRows(idx, 0,0);
     parentCategory->appendChild(new TreeCategory(_test, parentCategory));
     endInsertRows();
 }
@@ -83,7 +83,11 @@ void TestListModel::deleteTest(const Test &_test)
 
     if (idx.isValid()) {
         TreeCategory* parentCategory = static_cast<TreeCategory*>(idx.internalPointer());
-        beginRemoveRows(idx,1,1);
+        int n;
+        for (n = 0; n < parentCategory->childCount(); n++) {
+            if (parentCategory->child(n)->getTest().getName() == _test.getName()) break;
+        }
+        beginRemoveRows(idx,n,n);
         parentCategory->deleteChild(_test.getName());
         endRemoveRows();
         _test.Delete();
@@ -195,4 +199,13 @@ QVariant TestListModel::headerData(int section, Qt::Orientation orientation, int
 QModelIndex TestListModel::secondColumn(const QModelIndex &_item)
 {
     return createIndex(_item.row(), 1, _item.internalPointer());
+}
+
+TreeCategory *TestListModel::getItem(const QModelIndex &_indx)
+{
+    if (_indx.isValid()) {
+        TreeCategory* item = static_cast<TreeCategory*>(_indx.internalPointer());
+        if (item) return item;
+    }
+    return root;
 }
