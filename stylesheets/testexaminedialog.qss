@@ -1,10 +1,18 @@
-QAbstractScrollArea
-{
-background-color: transparent;
-}
-
 QDialog{
     background-color:#1d1d1d;
+}
+
+QScrollArea {
+background: transparent;
+border:1px solid #2d89ef;
+border-radius:4px;
+padding:0px;
+}
+QScrollArea > QWidget > QWidget { background: transparent; padding:0px;}
+QScrollArea > QWidget > QScrollBar { background: palette(base); }
+
+QAbstractScrollArea{
+background:transparent;
 }
 
 QPushButton{
@@ -100,3 +108,14 @@ QLabel#label_Description{
     color:#666666;
 }
 
+QTimeEdit{
+    border-radius:4px;
+    background:#666666;
+    border:2px solid #2d89ef;
+}
+
+QTimeEdit{
+    border-radius:4px;
+    background:#666666;
+    border:2px solid red;
+}

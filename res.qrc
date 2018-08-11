@@ -10,6 +10,7 @@
         <file>icons/radio-button-on.svg</file>
         <file>icons/radio-button-off-hovered.svg</file>
         <file>icons/radio-button-on-hovered.svg</file>
+        <file>icons/radio-button-clear.svg</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/Anton-Regular.ttf</file>

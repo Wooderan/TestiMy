@@ -1,8 +1,26 @@
 
-/*QWidget{
-background-color:#666666;
-border: 2px solid red;
+/*.TestItemWidget2{
+    background: #1d1d1d;
+    border: 4px solid #1d1d1d;
+border-bottom:2px solid #e78e2d;
+    border-radius: 4px;
 }*/
+
+.TestItemWidget2[state="u"]{
+    background: #1d1d1d;
+    border-bottom:2px solid #e78e2d;
+    border-radius: 4px;
+}
+.TestItemWidget2[state="r"]{
+background: qlineargradient(spread:pad, x1:0.502488, y1:0, x2:0.517413, y2:1, stop:0 rgba(29, 29, 29, 255), stop:0.348259 rgba(39, 47, 31, 255), stop:0.61194 rgba(53, 73, 34, 255), stop:0.875622 rgba(93, 146, 42, 255), stop:1 rgba(138, 226, 52, 255));
+border-bottom:2px solid #e78e2d;
+border-radius: 4px;
+}
+.TestItemWidget2[state="w"]{
+background: qlineargradient(spread:pad, x1:0.502, y1:0, x2:0.517, y2:1, stop:0 rgba(29, 29, 29, 255), stop:0.333333 rgba(65, 31, 31, 255), stop:0.661692 rgba(109, 33, 33, 255), stop:0.870647 rgba(165, 36, 36, 255), stop:1 rgba(239, 41, 41, 255));
+border-bottom:2px solid #e78e2d;
+border-radius: 4px;
+}
 
 QPushButton{
 border-style:solid;
@@ -51,49 +69,50 @@ color:#fff;
 }
 
 QRadioButton{
-    color:#666666;
+    font-size:15px;
+}
+
+QRadioButton::checked{
+    background:#343232;
+    border: 2px solid #2d89ef;
+    border-radius:4px;
+}
+QRadioButton::checked::disabled{
+background:#343232;
+border: 2px solid #2d89ef;
+border-radius:4px;
+}
+
+QRadioButton::checked::hover{
+    background:#4d4d4d;
+    border: 2px solid #2d89ef;
+    border-radius:4px;
+}
+
+QRadioButton::unchecked{
+    background:#343232;
+    border: 2px solid #343232;
+    border-radius:4px;
+}
+QRadioButton::unchecked::disabled{
+background:#343232;
+border: 2px solid #343232;
+border-radius:4px;
+}
+QRadioButton::unchecked::hover{
+background:#4d4d4d;
+border: 2px solid #343232;
+border-radius:4px;
 }
 
 QRadioButton::indicator{
-    width:12px;
-    height:12px;
+    image: url(:/icons/icons/radio-button-clear.svg);
 }
 
-QRadioButton::indicator::unchecked {
-    image: url(:/icons/icons/radio-button-off.svg);
-}
-
-QRadioButton::indicator:unchecked:hover {
-    image: url(:/icons/icons/radio-button-off-hovered.svg);
-}
-
-QRadioButton::indicator:unchecked:pressed {
-    image: url(:/icons/icons/radio-button-off.svg);
-}
-
-QRadioButton::indicator::checked {
-    image: url(:/icons/icons/radio-button-on.svg);
-}
-
-QRadioButton::indicator:checked:hover {
-    image: url(:/icons/icons/radio-button-on-hovered.svg);
-}
-
-QRadioButton::indicator:checked:pressed {
-    image: url(:/icons/icons/radio-button-on.svg);
-}
-
-QLabel#label_Name{
-    font-family: 'Anton', sans-serif;
-    font-style:bold;
-    font-size: 20px;
-    color:#e78e2d;
-}
-
-QLabel#label_Description{
+QLabel{
     font-family: 'Roboto', sans-serif;
-    font-style:bold;
     font-size: 20px;
-    color:#666666;
 }
+
+
 

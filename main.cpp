@@ -21,11 +21,11 @@ int main(int argc, char *argv[])
         acc = authorize.getCurr_account();
         if (acc.getPermission() == Account::Teacher) {
             CreateWindow w(acc);
-            w.show();
+            w.showMaximized();
             return a.exec();
         }else{
             MainWindow w(acc);
-            w.show();
+            w.showMaximized();
             return a.exec();
         }
     }

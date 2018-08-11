@@ -13,16 +13,26 @@ TestExamineDialog::TestExamineDialog(const Test &_test, QWidget *parent) :
     ui(new Ui::TestExamineDialog)
 {
     ui->setupUi(this);
+    QFile file(":/qss/stylesheets/testexaminedialog.qss");
+    file.open(QFile::ReadOnly);
+    QString styleSheet(file.readAll());
+    setStyleSheet(styleSheet);
+    ensurePolished();
+    file.close();
     this->setWindowTitle(QString("TestiMy - %1").arg(_test.getName()));
 
     size_t n = _test.getN();
     QWidget* scrollWidget = new QWidget(this);
     scrollWidget->setObjectName("scrollWidget");
+    scrollWidget->setObjectName("scrollWidget");
     QVBoxLayout *scrollLayout = new QVBoxLayout(scrollWidget);
+    scrollLayout->setSpacing(5);
+    scrollLayout->setContentsMargins(1,1,1,1);
     scrollWidget->setLayout(scrollLayout);
 
     for (size_t i = 0; i < n; i++) {
         TestItemWidget2 *itemWidget = new TestItemWidget2(_test.at(i), scrollWidget);
+        itemWidget->setProperty("state", 'u');
         scrollLayout->addWidget(itemWidget);
     }
 
@@ -30,6 +40,7 @@ TestExamineDialog::TestExamineDialog(const Test &_test, QWidget *parent) :
     ui->timer_edit->setTime(_test.getTime());
     ui->timer_edit->setDisplayFormat("hh:mm:ss");
     ui->timer_edit->setReadOnly(true);
+    ui->timer_edit->setStyleSheet("QTimeEdit{border-radius:4px;background:#666666;border:2px solid #2d89ef;}");
     mark = 0;
     timer = new QTimer(this);
     QObject::connect(timer, &QTimer::timeout, this, &TestExamineDialog::update_timer);
@@ -42,12 +53,6 @@ TestExamineDialog::TestExamineDialog(const Test &_test, QWidget *parent) :
     ui->label_Description->setText(_test.getDescripton());
     questions = static_cast<int>(_test.getN());
 
-    QFile file(":/qss/stylesheets/testexaminedialog.qss");
-    file.open(QFile::ReadOnly);
-    QString styleSheet(file.readAll());
-    setStyleSheet(styleSheet);
-    ensurePolished();
-    file.close();
 }
 
 TestExamineDialog::~TestExamineDialog()
@@ -72,12 +77,12 @@ void TestExamineDialog::check_results()
         if (item != nullptr) {
             if (check_question(item))
             {
-                item->setStyleSheet(QString("background-color:green"));
+                item->setProperty("state", 'r');
                 score++;
             }else{
-                item->setStyleSheet(QString("background-color:red"));
+                item->setProperty("state", 'w');
             }
-
+            item->disableRadio();
         }
     }
 
@@ -116,7 +121,18 @@ bool TestExamineDialog::check_question(TestItemWidget2 *_item)
 
 void TestExamineDialog::update_timer()
 {
+    static bool b = true;
     QTime time = ui->timer_edit->time();
+
+    if (time < QTime(0,0,30)) {
+        if (b) {
+            ui->timer_edit->setStyleSheet("QTimeEdit{border-radius:4px;background:#666666;border:2px solid #2d89ef;}");
+            b = false;
+        }else{
+            ui->timer_edit->setStyleSheet("QTimeEdit{border-radius:4px;background:#666666;border:2px solid red;}");
+            b = true;
+        }
+    }
     if (time == QTime(0,0,0)) {
         this->timer->stop();
         emit TimeOut();
