@@ -1,5 +1,6 @@
 #include "authorizationdialog.h"
 #include "ui_authorizationdialog.h"
+#include <QFile>
 #include <QMessageBox>
 #include <QVBoxLayout>
 #include "loginform.h"
@@ -22,6 +23,15 @@ AuthorizationDialog::AuthorizationDialog(QWidget *parent) :
     createId = widget->addWidget(create_form);
     setSubWidget(loginId);
 //    QObject::connect(this, &QDialog::accepted, this, &QDialog::accept);
+
+
+
+    QFile file(":/qss/stylesheets/authorization.css");
+    file.open(QFile::ReadOnly);
+    QString styleSheet(file.readAll());
+    setStyleSheet(styleSheet);
+    ensurePolished();
+    file.close();
 }
 
 AuthorizationDialog::~AuthorizationDialog()

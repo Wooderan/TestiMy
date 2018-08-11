@@ -34,6 +34,13 @@ MainWindow::MainWindow(const Account &_account, QWidget *parent) :
     statistic(account);
     ui->label_testInfo->setText(statistic.formLabale());
     ui->listView_tests->header()->setSectionResizeMode(QHeaderView::Stretch);
+
+    QFile file(":/qss/stylesheets/main.qss");
+    file.open(QFile::ReadOnly);
+    QString styleSheet(file.readAll());
+    setStyleSheet(styleSheet);
+    ensurePolished();
+    file.close();
 }
 
 MainWindow::~MainWindow()
@@ -47,7 +54,12 @@ void MainWindow::test_change(const QItemSelection &selected, const QItemSelectio
     QModelIndexList indexList = selected.indexes();
     // we always will have only one selected item
     TreeCategory* category = static_cast<TreeCategory*>(indexList[0].internalPointer());
-    if (category->isCategory()) return;
+    if (category->isCategory()){
+        if (ui->pushButton_passTest->isEnabled())
+            ui->pushButton_passTest->setEnabled(false);
+        ui->label_testInfo->setText(statistic.formLabale());
+        return;
+    }
 
     Test test = category->getTest();
 

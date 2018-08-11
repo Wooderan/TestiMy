@@ -43,7 +43,8 @@ SOURCES += \
     manageaccountsdialog.cpp \
     accountslistmodel.cpp \
     changeaccountdialog.cpp \
-    accountsstatsdialog.cpp
+    accountsstatsdialog.cpp \
+    testitemwidget2.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -66,7 +67,8 @@ HEADERS += \
     manageaccountsdialog.h \
     accountslistmodel.h \
     changeaccountdialog.h \
-    accountsstatsdialog.h
+    accountsstatsdialog.h \
+    testitemwidget2.h
 
 FORMS += \
         mainwindow.ui \
@@ -80,9 +82,19 @@ FORMS += \
     changepassworddialog.ui \
     manageaccountsdialog.ui \
     changeaccountdialog.ui \
-    accountsstatsdialog.ui
+    accountsstatsdialog.ui \
+    testitemwidget2.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    stylesheets/authorization.css \
+    stylesheets/main.qss \
+    stylesheets/testexaminedialog.qss \
+    stylesheets/testitemwidget.qss
+
+RESOURCES += \
+    res.qrc

@@ -2,7 +2,7 @@
 #define TESTEXAMINEDIALOG_H
 
 #include <QDialog>
-#include "testitemwidget.h"
+#include "testitemwidget2.h"
 #include <QTimer>
 #include <test.h>
 
@@ -25,7 +25,7 @@ protected slots:
 private slots:
     void on_btn_Ok_clicked();
 
-    bool check_question(TestItemWidget *_item);
+    bool check_question(TestItemWidget2 *_item);
     void update_timer();
 signals:
     void TimeOut();

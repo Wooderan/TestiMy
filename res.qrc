@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/qss">
+        <file>stylesheets/authorization.css</file>
+        <file>stylesheets/main.qss</file>
+        <file>stylesheets/testexaminedialog.qss</file>
+        <file>stylesheets/testitemwidget.qss</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>icons/radio-button-off.svg</file>
+        <file>icons/radio-button-on.svg</file>
+        <file>icons/radio-button-off-hovered.svg</file>
+        <file>icons/radio-button-on-hovered.svg</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file>fonts/Anton-Regular.ttf</file>
+        <file>fonts/Roboto-Thin.ttf</file>
+    </qresource>
+</RCC>

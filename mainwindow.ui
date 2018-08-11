@@ -26,6 +26,10 @@
       </item>
       <item>
        <widget class="QFrame" name="frame_2">
+        <property name="styleSheet">
+         <string notr="true">background-color: #2d89ef;
+border-radius:2px;</string>
+        </property>
         <property name="frameShape">
          <enum>QFrame::HLine</enum>
         </property>
@@ -46,6 +50,10 @@
       </item>
       <item>
        <widget class="QFrame" name="frame">
+        <property name="styleSheet">
+         <string notr="true">background-color: #2d89ef;
+border-radius:2px;</string>
+        </property>
         <property name="frameShape">
          <enum>QFrame::HLine</enum>
         </property>
@@ -83,20 +91,11 @@
        <bool>false</bool>
       </property>
       <attribute name="headerVisible">
-       <bool>true</bool>
+       <bool>false</bool>
       </attribute>
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

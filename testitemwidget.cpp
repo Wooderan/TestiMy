@@ -15,6 +15,13 @@ TestItemWidget::TestItemWidget(const TestItem &_item, QWidget *parent)
     QGridLayout *subLayout = new QGridLayout(dynamic_cast<QWidget*>(mainLayout));
     fill_subLayout(subLayout, _item);
     mainLayout->addLayout(subLayout);
+
+    QFile file(":/qss/stylesheets/testitemwidget.qss");
+    file.open(QFile::ReadOnly);
+    QString styleSheet(file.readAll());
+    setStyleSheet(styleSheet);
+    ensurePolished();
+    file.close();
 }
 
 QString TestItemWidget::getCorrect_variant() const

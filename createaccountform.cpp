@@ -92,13 +92,13 @@ void CreateAccountForm::on_radioButton_teacher_clicked()
 {
     QRadioButton *btn = dynamic_cast<QRadioButton*>(sender());
     if (btn->objectName() == "radioButton_teacher") {
-        ui->lineEdit_name->setEnabled(false);
-        ui->lineEdit_adress->setEnabled(false);
-        ui->lineEdit_phoneNumber->setEnabled(false);
+        ui->lineEdit_name->setReadOnly(true);
+        ui->lineEdit_adress->setReadOnly(true);
+        ui->lineEdit_phoneNumber->setReadOnly(true);
     }else{
-        ui->lineEdit_name->setEnabled(true);
-        ui->lineEdit_adress->setEnabled(true);
-        ui->lineEdit_phoneNumber->setEnabled(true);
+        ui->lineEdit_name->setReadOnly(false);
+        ui->lineEdit_adress->setReadOnly(false);
+        ui->lineEdit_phoneNumber->setReadOnly(false);
     }
 }
 

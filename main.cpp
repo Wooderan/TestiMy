@@ -1,5 +1,6 @@
 ﻿#include "mainwindow.h"
 #include <QApplication>
+#include <QFontDatabase>
 #include <QMessageBox>
 #include "test.h"
 #include "testitem.h"
@@ -13,6 +14,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QFontDatabase::addApplicationFont(":/fonts/fonts/Anton-Regular.ttf");
     AuthorizationDialog authorize;
     Account acc;
     if (authorize.exec() == QDialog::Accepted) {

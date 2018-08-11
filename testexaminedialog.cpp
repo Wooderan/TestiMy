@@ -1,7 +1,7 @@
 #include "testexaminedialog.h"
 #include "ui_testexaminedialog.h"
 #include "testitem.h"
-#include "testitemwidget.h"
+#include "testitemwidget2.h"
 
 #include <QRadioButton>
 #include <QDebug>
@@ -17,11 +17,12 @@ TestExamineDialog::TestExamineDialog(const Test &_test, QWidget *parent) :
 
     size_t n = _test.getN();
     QWidget* scrollWidget = new QWidget(this);
+    scrollWidget->setObjectName("scrollWidget");
     QVBoxLayout *scrollLayout = new QVBoxLayout(scrollWidget);
     scrollWidget->setLayout(scrollLayout);
 
     for (size_t i = 0; i < n; i++) {
-        TestItemWidget *itemWidget = new TestItemWidget(_test.at(i), scrollWidget);
+        TestItemWidget2 *itemWidget = new TestItemWidget2(_test.at(i), scrollWidget);
         scrollLayout->addWidget(itemWidget);
     }
 
@@ -40,6 +41,13 @@ TestExamineDialog::TestExamineDialog(const Test &_test, QWidget *parent) :
     ui->label_Name->setText(_test.getName());
     ui->label_Description->setText(_test.getDescripton());
     questions = static_cast<int>(_test.getN());
+
+    QFile file(":/qss/stylesheets/testexaminedialog.qss");
+    file.open(QFile::ReadOnly);
+    QString styleSheet(file.readAll());
+    setStyleSheet(styleSheet);
+    ensurePolished();
+    file.close();
 }
 
 TestExamineDialog::~TestExamineDialog()
@@ -60,7 +68,7 @@ void TestExamineDialog::check_results()
     QVBoxLayout *layout = dynamic_cast<QVBoxLayout*>(widget->layout());
 
     for (int i = 0; i < layout->count(); i++) {
-        TestItemWidget *item = dynamic_cast<TestItemWidget*>(layout->itemAt(i)->widget());
+        TestItemWidget2 *item = dynamic_cast<TestItemWidget2*>(layout->itemAt(i)->widget());
         if (item != nullptr) {
             if (check_question(item))
             {
@@ -89,7 +97,7 @@ void TestExamineDialog::check_results()
                                                             .arg(mark));
 }
 
-bool TestExamineDialog::check_question(TestItemWidget *_item)
+bool TestExamineDialog::check_question(TestItemWidget2 *_item)
 {
     QObjectList list = _item->children();
     QRadioButton *btn = nullptr;
