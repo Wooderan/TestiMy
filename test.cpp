@@ -87,7 +87,9 @@ QDataStream& operator>>(QDataStream& istream, TestItem& testitem)
 
 QDataStream& operator<<(QDataStream& ostream, const Test& test)
 {
-    ostream << test.getName() << test.getDescripton() << test.getTime() << test.getCategory();
+    ostream << test.getName() << test.getDescripton() << test.getTime() << test.getCategory() << test.getImage();
+
+    ostream << test.getIsCategory();
     ostream << static_cast<int>(test.getN());
     for (size_t i = 0; i < test.getN(); i++) {
         ostream << test.at(i);
@@ -98,6 +100,12 @@ QDataStream& operator>>(QDataStream& istream, Test& test)
 {
     istream >> test.getName() >> test.getDescripton() >> test.getTime() >> test.getCategory();
     int n;
+    bool b;
+    QPixmap image;
+    istream >> image;
+    test.setImage(image);
+    istream >> b;
+    test.setIsCategory(b);
     istream >> n;
     for (size_t i = 0; i < static_cast<size_t>(n); i++) {
         TestItem item;
@@ -215,14 +223,42 @@ void Test::setCategory(const QString &value)
     category = value;
 }
 
+bool Test::getIsCategory() const
+{
+    return isCategory;
+}
+
+void Test::setIsCategory(bool value)
+{
+    isCategory = value;
+}
+
+QPixmap Test::getImage() const
+{
+    return image;
+}
+
+QPixmap &Test::getImage()
+{
+    return image;
+}
+
+void Test::setImage(QPixmap value)
+{
+    image = value;
+}
+
 Test::Test()
 {
     name = "No name";
+    descripton = "No descriprion";
+    category = "No category";
+    isCategory = false;
+    image = QPixmap();
 }
 
 Test::~Test()
 {
-
 }
 
 TestItem &Test::at(size_t n)

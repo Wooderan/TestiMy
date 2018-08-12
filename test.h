@@ -2,6 +2,7 @@
 #define TEST_H
 
 #include <QFileInfo>
+#include <QPixmap>
 #include <QQuickItem>
 #include <QTime>
 #include "testitem.h"
@@ -16,6 +17,8 @@ protected:
     QString descripton;
     QString category;
     QTime time;
+    bool isCategory;
+    QPixmap image;
 public:
     Test();
     ~Test();
@@ -54,6 +57,13 @@ public:
     friend QDataStream& operator>>(QDataStream& istream, Test& test);
 
     friend bool operator==(const Test& _left, const Test& _right);
+
+    bool getIsCategory() const;
+    void setIsCategory(bool value);
+
+    QPixmap getImage() const;
+    QPixmap &getImage();
+    void setImage(QPixmap value);
 
 signals:
 

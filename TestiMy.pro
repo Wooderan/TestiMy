@@ -45,7 +45,9 @@ SOURCES += \
     changeaccountdialog.cpp \
     accountsstatsdialog.cpp \
     testitemwidget2.cpp \
-    timer.cpp
+    timer.cpp \
+    treeitem.cpp \
+    treemodel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -70,7 +72,9 @@ HEADERS += \
     changeaccountdialog.h \
     accountsstatsdialog.h \
     testitemwidget2.h \
-    timer.h
+    timer.h \
+    treeitem.h \
+    treemodel.h
 
 FORMS += \
         mainwindow.ui \
