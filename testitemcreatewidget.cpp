@@ -10,6 +10,14 @@ TestItemCreateWidget::TestItemCreateWidget(QWidget *parent, const TestItem *_ite
     ui(new Ui::TestItemCreateWidget)
 {
     ui->setupUi(this);
+
+    QFile file(":/qss/stylesheets/testitemcreatewidget.qss");
+    file.open(QFile::ReadOnly);
+    QString styleSheet(file.readAll());
+    setStyleSheet(styleSheet);
+    ensurePolished();
+    file.close();
+
     if (_item != nullptr) {
         ui->text_question->setText(_item->getQuestion());
         for (size_t i = 0; i < _item->getN(); i++) {

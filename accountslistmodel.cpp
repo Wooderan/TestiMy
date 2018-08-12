@@ -3,6 +3,7 @@
 #include <QDialog>
 #include <QLayout>
 #include <QDebug>
+#include <QFile>
 #include "createaccountform.h"
 #include "changeaccountdialog.h"
 
@@ -63,6 +64,15 @@ void AccountsListModel::createAccount()
     CreateAccountForm *form = new CreateAccountForm(*list, dialog);
     layout->addWidget(form);
     dialog->setLayout(layout);
+
+    QFile file(":/qss/stylesheets/authorization.css");
+    file.open(QFile::ReadOnly);
+    QString styleSheet(file.readAll());
+    dialog->setStyleSheet(styleSheet);
+    dialog->ensurePolished();
+    file.close();
+
+    dialog->resize(800,400);
     if (dialog->exec() == QDialog::Accepted) {
         int n = list->getN();
         beginInsertRows(QModelIndex(), n,n);
@@ -79,6 +89,7 @@ void AccountsListModel::changeAccount(const QString &_login)
     Account acc = list->getAccount(_login);
 
     ChangeAccountDialog *dialog = new ChangeAccountDialog(acc);
+    dialog->resize(800,600);
     if (dialog->exec() == QDialog::Accepted) {
         deleteAccount(acc.getLogin());
         int n = list->getN();

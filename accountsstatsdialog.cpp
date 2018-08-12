@@ -9,6 +9,7 @@ AccountsStatsDialog::AccountsStatsDialog(const Account &_acc, QWidget *parent) :
     ui->setupUi(this);
     TestListModel *model = new TestListModel(this, &_acc);
     ui->treeView->setModel(model);
+    ui->treeView->header()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->label->setText(QString("%1\n"
                                "Name:%2\n"

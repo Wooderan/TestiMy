@@ -16,6 +16,13 @@ CreateWindow::CreateWindow(const Account &_account, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    QFile file(":/qss/stylesheets/createwindows.qss");
+    file.open(QFile::ReadOnly);
+    QString styleSheet(file.readAll());
+    setStyleSheet(styleSheet);
+    ensurePolished();
+    file.close();
+
     //filling listview and model
     tests = new TestListModel(this);
     ui->listView_tests->setModel(tests);
@@ -29,6 +36,15 @@ CreateWindow::CreateWindow(const Account &_account, QWidget *parent) :
     //filling testinfo
     QItemSelectionModel *selection = ui->listView_tests->selectionModel();
     QObject::connect(selection, &QItemSelectionModel::selectionChanged, this, &CreateWindow::test_change);
+
+    ui->label_1->setText("Subject: ");
+    ui->textBrowser_1->setText("");
+    ui->label_2->setText("Description: ");
+    ui->textBrowser_2->setText("");
+    ui->label_3->setText("Time: ");
+    ui->textBrowser_3->setText("");
+    ui->label_4->setText("Questions: ");
+    ui->textBrowser_4->setText("");
 
 
 }
@@ -65,15 +81,14 @@ void CreateWindow::test_change(const QItemSelection &selected, const QItemSelect
     }else{
         bestResult = "You don't pass this test before";
     }
-
-    ui->label_testInfo->setText(QString("Subject:%1\n"
-                                        "Description:%2\n"
-                                        "Time:%3\n"
-                                        "Questions:%4\n")
-                                        .arg(test.getName())
-                                        .arg(test.getDescripton())
-                                        .arg(test.getTime().toString())
-                                        .arg(test.getN()));
+    ui->label_1->setText("Subject: ");
+    ui->textBrowser_1->setText(test.getName());
+    ui->label_2->setText("Description: ");
+    ui->textBrowser_2->setText(test.getDescripton());
+    ui->label_3->setText("Time: ");
+    ui->textBrowser_3->setText(test.getTime().toString());
+    ui->label_4->setText("Questions: ");
+    ui->textBrowser_4->setText(QString::number(test.getN()));
 
     if (!ui->pushButton_passTest->isEnabled())
         ui->pushButton_passTest->setEnabled(true);
@@ -92,6 +107,7 @@ void CreateWindow::on_pushButton_passTest_clicked()
     if (category->isCategory()) return;
     Test test = category->getTest();
     TestExamineDialog *dialog = new TestExamineDialog(test, this);
+    dialog->setWindowState(dialog->windowState() | Qt::WindowMaximized);
     dialog->exec();
 }
 
@@ -115,12 +131,14 @@ void CreateWindow::on_actionChange_login_or_password_triggered()
 void CreateWindow::on_actionManage_accounts_triggered()
 {
     ManageAccountsDialog *dialog = new ManageAccountsDialog(this);
+    dialog->setWindowState(dialog->windowState() | Qt::WindowMaximized);
     dialog->exec();
 }
 
 void CreateWindow::on_pushButton_make_clicked()
 {
     TestCreateDialog *dialog = new TestCreateDialog(this);
+    dialog->setWindowState(dialog->windowState() | Qt::WindowMaximized);
     if (dialog->exec() == QDialog::Accepted) {
         const Test& test = dialog->getTest();
         tests->appendTest(test);
@@ -144,6 +162,7 @@ void CreateWindow::on_pushButton_change_clicked()
     TreeCategory* current = tests->getItem(ui->listView_tests->selectionModel()->currentIndex());
     Test test = current->getTest();
     TestCreateDialog *dialog = new TestCreateDialog(this, &test);
+    dialog->setWindowState(dialog->windowState() | Qt::WindowMaximized);
     if (dialog->exec() == QDialog::Accepted) {
         tests->deleteTest(test);
         test.Delete();

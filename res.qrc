@@ -4,6 +4,8 @@
         <file>stylesheets/main.qss</file>
         <file>stylesheets/testexaminedialog.qss</file>
         <file>stylesheets/testitemwidget.qss</file>
+        <file>stylesheets/createwindows.qss</file>
+        <file>stylesheets/testitemcreatewidget.qss</file>
     </qresource>
     <qresource prefix="/icons">
         <file>icons/radio-button-off.svg</file>

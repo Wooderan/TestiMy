@@ -96,7 +96,9 @@ DISTFILES += \
     stylesheets/authorization.css \
     stylesheets/main.qss \
     stylesheets/testexaminedialog.qss \
-    stylesheets/testitemwidget.qss
+    stylesheets/testitemwidget.qss \
+    stylesheets/createwindows.qss \
+    stylesheets/testitemcreatewidget.qss
 
 RESOURCES += \
     res.qrc

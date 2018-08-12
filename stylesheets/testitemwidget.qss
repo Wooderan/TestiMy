@@ -1,11 +1,3 @@
-
-/*.TestItemWidget2{
-    background: #1d1d1d;
-    border: 4px solid #1d1d1d;
-border-bottom:2px solid #e78e2d;
-    border-radius: 4px;
-}*/
-
 .TestItemWidget2[state="u"]{
     background: #1d1d1d;
     border-bottom:2px solid #e78e2d;

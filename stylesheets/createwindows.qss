@@ -40,7 +40,7 @@ QPushButton:text{
 }
 
 QLabel{
-    color:#6a6262;
+    color:#fff;
 }
 
 QGroupBox {
@@ -55,8 +55,8 @@ QRadioButton{
 }
 
 QRadioButton::indicator{
-    width:12px;
-    height:12px;
+    width:16px;
+    height:16px;
 }
 
 QRadioButton::indicator::unchecked {
@@ -83,18 +83,37 @@ QRadioButton::indicator:checked:pressed {
     image: url(:/icons/icons/radio-button-on.svg);
 }
 
-QLineEdit{
-    border:2px solid #fff;
+QLineEdit, QTextEdit{
+    border:2px solid #8e8e8e;
+    background:#8e8e8e;
     border-radius:2px;
     padding:5px;
 }
 
-QLineEdit::focus{
+QLineEdit::focus, QTextEdit::focus{
     padding:5px;
     border:2px solid #2d89ef;
     border-radius: 2px;
+    padding:0px;
 }
 
+
+QTextBrowser, QTextBrowser::focus{
+padding:0px;
+border:2px solid #1d1d1d;
+background:#1d1d1d;
+border-radius:2px;
+font-family: 'Roboto', sans-serif;
+font-style:bold;
+font-size: 20px;
+color:#fff;
+}
+QLabel{
+    font-family: 'Anton', sans-serif;
+    font-style:bold;
+    font-size: 20px;
+    color:#e78e2d;
+}
 
 QLineEdit[echoMode="2"] {
     lineedit-password-character: 9679;
@@ -104,22 +123,18 @@ QLineEdit::read-only {
     background: gray;
 }
 
-QLabel{
+QLabel#label_accountInfo{
     font-family: 'Anton', sans-serif;
     font-style:bold;
     font-size: 20px;
     color:#e78e2d;
 }
 
-QTextEdit{
+QLabel#label_testInfo{
     font-family: 'Roboto', sans-serif;
     font-style:bold;
     font-size: 20px;
     color:#fff;
-    border-radius:8px;
-/*    border-color:red;*/
-    background:#1d1d1d;
-/*    background:red;*/
 }
 
 QTreeView{
@@ -136,6 +151,54 @@ QTreeView {
 /*    show-decoration-selected: 1;*/
 }
 
+QToolBar {
+    background: #4d4d4d;
+    border:none;
+    spacing: 3px; /* spacing between items in the tool bar */
+}
+
+QToolBar::separator {
+    background: #4d4d4d;
+    border-radius:8px;
+}
+
+QToolButton{
+/*border-style:solid;*/
+
+background-color:#4d4d4d;
+/*border-color:#3d3d3d;*/
+color:#fff;
+border-radius:2px;
+/*border-width:2px;*/
+padding:2px;
+}
+
+QToolButton:hover{
+    color:#ccc;
+        background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(45, 45, 45, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));
+/*        border-color:#2d89ef;*/
+    border-width:2px;
+}
+
+QScrollArea {
+background: transparent;
+border:1px solid #2d89ef;
+border-radius:4px;
+padding:0px;
+}
+QScrollArea > QWidget > QWidget { background: transparent; padding:0px;}
+
+QTimeEdit{border-radius:4px;background:#666666;}
+
+
+QTableView{
+background-color:#3d3d3d;
+color:#fff;
+  selection-background-color: #e78e2d;
+border:solid;
+border-width:3px;
+border-color:#2d89ef;
+}
 QHeaderView::section{
 background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255));
 border:none;
@@ -155,4 +218,3 @@ border-top-color:#149ED9;
 color:#fff;
         font: 75 12pt "Calibri";
 }
-

@@ -1,45 +1,8 @@
-QDialog{
-    background-color:#1d1d1d;
+.TestItemCreateWidget{
+    background: #1d1d1d;
+    border-bottom:2px solid #e78e2d;
+    border-radius: 4px;
 }
-
-QScrollArea {
-background: transparent;
-border:1px solid #2d89ef;
-border-radius:4px;
-padding:0px;
-}
-QScrollArea > QWidget > QWidget { background: transparent; padding:0px;}
-/*QScrollArea > QWidget > QScrollBar { background: palette(dark); color:red }*/
-
-
-/*--------------------------------------------------*/
-QScrollBar:vertical {
-    border: 2px solid grey;
-    background: #32CC99;
-    height: 15px;
-    margin: 0px 20px 0 20px;
-}
-QScrollBar::handle:vertical {
-    background: white;
-    min-width: 20px;
-}
-QScrollBar::add-line:vertical {
-    border: 2px solid grey;
-    background: #32CC99;
-    width: 20px;
-    subcontrol-position: right;
-    subcontrol-origin: margin;
-}
-
-QScrollBar::sub-line:vertical {
-    border: 2px solid grey;
-    background: #32CC99;
-    width: 20px;
-    subcontrol-position: left;
-    subcontrol-origin: margin;
-}
-/*--------------------------------------------------*/
-
 
 QPushButton{
 border-style:solid;
@@ -80,13 +43,6 @@ QLabel{
     color:#fff;
 }
 
-QGroupBox {
-color:#fff;
-    border: 2px solid #4f4a4a;
-    border-radius: 5px;
-    margin-top: 1ex; /* leave space at the top for the title */
-}
-
 QRadioButton{
     color:#fff;
 }
@@ -120,29 +76,10 @@ QRadioButton::indicator:checked:pressed {
     image: url(:/icons/icons/radio-button-on.svg);
 }
 
-QLabel#label_Name{
-    font-family: 'Anton', sans-serif;
-    font-style:bold;
-    font-size: 20px;
-    color:#e78e2d;
-}
-
-QLabel#label_Description{
+QLabel{
     font-family: 'Roboto', sans-serif;
-    font-style:bold;
     font-size: 20px;
-    color:#fff;
 }
 
-QTimeEdit{
-    border-radius:4px;
-    background:#666666;
-    border:2px solid #2d89ef;
-}
 
-QTimeEdit{
-    border-radius:4px;
-    background:#666666;
-    border:2px solid red;
-}
 

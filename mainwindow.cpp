@@ -32,7 +32,17 @@ MainWindow::MainWindow(const Account &_account, QWidget *parent) :
     QObject::connect(selection, &QItemSelectionModel::selectionChanged, this, &MainWindow::test_change);
 
     statistic(account);
-    ui->label_testInfo->setText(statistic.formLabale());
+    ui->label_1->setText("Passed tests: ");
+    ui->textBrowser_1->setText(QString::number(statistic.getCount()));
+    ui->label_2->setText("Excelent results: ");
+    ui->textBrowser_2->setText(QString::number(statistic.getExcelent()));
+    ui->label_3->setText("Avarage results: ");
+    ui->textBrowser_3->setText(QString::number(statistic.getAvarage()));
+    ui->label_4->setText("Bad results: ");
+    ui->textBrowser_4->setText(QString::number(statistic.getBad()));
+    ui->label_5->setText("Avarage mark: ");
+    ui->textBrowser_5->setText(QString::number(statistic.getAvarageMark()));
+
     ui->listView_tests->header()->setSectionResizeMode(QHeaderView::Stretch);
 
     QFile file(":/qss/stylesheets/main.qss");
@@ -57,7 +67,16 @@ void MainWindow::test_change(const QItemSelection &selected, const QItemSelectio
     if (category->isCategory()){
         if (ui->pushButton_passTest->isEnabled())
             ui->pushButton_passTest->setEnabled(false);
-        ui->label_testInfo->setText(statistic.formLabale());
+        ui->label_1->setText("Passed tests: ");
+        ui->textBrowser_1->setText(QString::number(statistic.getCount()));
+        ui->label_2->setText("Excelent results: ");
+        ui->textBrowser_2->setText(QString::number(statistic.getExcelent()));
+        ui->label_3->setText("Avarage results: ");
+        ui->textBrowser_3->setText(QString::number(statistic.getAvarage()));
+        ui->label_4->setText("Bad results: ");
+        ui->textBrowser_4->setText(QString::number(statistic.getBad()));
+        ui->label_5->setText("Avarage mark: ");
+        ui->textBrowser_5->setText(QString::number(statistic.getAvarageMark()));
         return;
     }
 
@@ -71,16 +90,16 @@ void MainWindow::test_change(const QItemSelection &selected, const QItemSelectio
         bestResult = "You don't pass this test before";
     }
 
-    ui->label_testInfo->setText(QString("Subject:%1\n"
-                                        "Description:%2\n"
-                                        "Time:%3\n"
-                                        "Questions:%4\n"
-                                        "Your result:%5")
-                                        .arg(test.getName())
-                                        .arg(test.getDescripton())
-                                        .arg(test.getTime().toString())
-                                        .arg(test.getN())
-                                        .arg(bestResult));
+    ui->label_1->setText("Subject: ");
+    ui->textBrowser_1->setText(test.getName());
+    ui->label_2->setText("Description: ");
+    ui->textBrowser_2->setText(test.getDescripton());
+    ui->label_3->setText("Time: ");
+    ui->textBrowser_3->setText(test.getTime().toString());
+    ui->label_4->setText("Questions: ");
+    ui->textBrowser_4->setText(QString::number(test.getN()));
+    ui->label_5->setText("Your result: ");
+    ui->textBrowser_5->setText(bestResult);
 
     if (!ui->pushButton_passTest->isEnabled())
         ui->pushButton_passTest->setEnabled(true);
@@ -97,19 +116,21 @@ void MainWindow::on_pushButton_passTest_clicked()
         QMessageBox::warning(this, "Note", "You have already passed this test, and this passage will not change the mark");
     }
     TestExamineDialog *dialog = new TestExamineDialog(test, this);
+    dialog->setWindowState(dialog->windowState() | Qt::WindowMaximized);
     if (dialog->exec() == QDialog::Accepted) {
         if (account.getResult(testName) == Account::NO_RESULT) {
             account.setResult(testName, dialog->getMark());
-            ui->label_testInfo->setText(QString("Subject:%1\n"
-                                                "Description:%2\n"
-                                                "Time:%3\n"
-                                                "Questions:%4\n"
-                                                "Your result:%5")
-                                                .arg(test.getName())
-                                                .arg(test.getDescripton())
-                                                .arg(test.getTime().toString())
-                                                .arg(test.getN())
-                                                .arg(account.getResult(testName)));
+            ui->label_1->setText("Subject: ");
+            ui->textBrowser_1->setText(test.getName());
+            ui->label_2->setText("Description: ");
+            ui->textBrowser_2->setText(test.getDescripton());
+            ui->label_3->setText("Time: ");
+            ui->textBrowser_3->setText(test.getTime().toString());
+            ui->label_4->setText("Questions: ");
+            ui->textBrowser_4->setText(QString::number(test.getN()));
+            ui->label_5->setText("Your result: ");
+            ui->textBrowser_4->setText(QString::number(account.getResult(testName)));
+
             AccountsList list;
             list.Load();
             list.deleteAccount(account.getLogin());

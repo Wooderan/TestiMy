@@ -56,5 +56,6 @@ void ManageAccountsDialog::on_pushButton_change_clicked()
 void ManageAccountsDialog::on_pushButton_stats_clicked()
 {
     AccountsStatsDialog* dialog = new AccountsStatsDialog(model->getAccount(ui->listView->selectionModel()->currentIndex()), this);
+    dialog->resize(800,600);
     dialog->exec();
 }
