@@ -4,7 +4,7 @@
 #include <QItemSelection>
 #include <QMainWindow>
 #include <account.h>
-#include "testlistmodel.h"
+#include "treemodel.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,7 +29,7 @@ private:
     Ui::MainWindow *ui;
     Account account;
     lookup_account_results statistic;
-    TestListModel *tests;
+    TreeModel *tests;
 };
 
 #endif // MAINWINDOW_H

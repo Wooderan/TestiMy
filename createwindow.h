@@ -4,7 +4,9 @@
 #include <QItemSelection>
 #include <QMainWindow>
 #include <account.h>
-#include "testlistmodel.h"
+//#include "testlistmodel.h"
+#include "treeitem.h"
+#include "treemodel.h"
 
 namespace Ui {
 class CreateWindow;
@@ -37,10 +39,14 @@ private slots:
 
     void on_pushButton_export_clicked();
 
+    void on_pushButton_make_category_clicked();
+
+    void on_pushButton_delete_category_clicked();
+
 private:
     Ui::CreateWindow *ui;
     Account account;
-    TestListModel *tests;
+    TreeModel *tests;
 };
 
 #endif // CREATEWINDOW_H

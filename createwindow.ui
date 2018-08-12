@@ -154,6 +154,12 @@ border-radius:2px;</string>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <widget class="QTreeView" name="listView_tests">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
           <property name="headerHidden">
            <bool>true</bool>
           </property>
@@ -179,24 +185,21 @@ border-radius:2px;</string>
     </item>
     <item>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="2" column="1">
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>Quit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="pushButton_delete">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Delete Test</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="1">
+       <widget class="QPushButton" name="pushButton_make_category">
+        <property name="text">
+         <string>Make Category</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="pushButton_make">
+        <property name="text">
+         <string>Make Test</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
        <widget class="QPushButton" name="pushButton_passTest">
         <property name="enabled">
          <bool>false</bool>
@@ -206,17 +209,24 @@ border-radius:2px;</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="pushButton_export">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="pushButton">
         <property name="text">
-         <string>Export Test</string>
+         <string>Quit</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
+       <widget class="QPushButton" name="pushButton_delete">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Delete Test</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
        <widget class="QPushButton" name="pushButton_change">
         <property name="enabled">
          <bool>false</bool>
@@ -226,10 +236,23 @@ border-radius:2px;</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton_make">
+      <item row="4" column="0">
+       <widget class="QPushButton" name="pushButton_export">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
-         <string>Make Test</string>
+         <string>Export Test</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="pushButton_delete_category">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Delete Category</string>
         </property>
        </widget>
       </item>

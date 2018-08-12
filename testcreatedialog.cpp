@@ -31,6 +31,16 @@ TestCreateDialog::TestCreateDialog(QWidget *parent, const Test *_test) :
     }
 }
 
+TestCreateDialog::TestCreateDialog(const QString &_category, QWidget *parent):
+    QDialog(parent),
+    ui(new Ui::TestCreateDialog)
+{
+    ui->setupUi(this);
+    QObject::connect(ui->buttonBox, &QDialogButtonBox::accepted, this, &TestCreateDialog::on_accepted);
+    ui->timeEdit->setDisplayFormat("hh:mm:ss");
+    ui->lineEdit_category->setText(_category);
+}
+
 TestCreateDialog::~TestCreateDialog()
 {
     delete ui;

@@ -47,7 +47,8 @@ SOURCES += \
     testitemwidget2.cpp \
     timer.cpp \
     treeitem.cpp \
-    treemodel.cpp
+    treemodel.cpp \
+    testcreatecategory.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -74,7 +75,8 @@ HEADERS += \
     testitemwidget2.h \
     timer.h \
     treeitem.h \
-    treemodel.h
+    treemodel.h \
+    testcreatecategory.h
 
 FORMS += \
         mainwindow.ui \
@@ -89,7 +91,8 @@ FORMS += \
     manageaccountsdialog.ui \
     changeaccountdialog.ui \
     accountsstatsdialog.ui \
-    testitemwidget2.ui
+    testitemwidget2.ui \
+    testcreatecategory.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

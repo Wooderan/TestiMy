@@ -13,6 +13,9 @@
         <file>icons/radio-button-off-hovered.svg</file>
         <file>icons/radio-button-on-hovered.svg</file>
         <file>icons/radio-button-clear.svg</file>
+        <file>icons/empty.jpg</file>
+        <file>icons/branch-closed.svg</file>
+        <file>icons/branch-opened.svg</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/Anton-Regular.ttf</file>

@@ -1,14 +1,16 @@
 #include "accountsstatsdialog.h"
 #include "ui_accountsstatsdialog.h"
-#include "testlistmodel.h"
+#include "treemodel.h"
 
 AccountsStatsDialog::AccountsStatsDialog(const Account &_acc, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AccountsStatsDialog)
 {
     ui->setupUi(this);
-    TestListModel *model = new TestListModel(this, &_acc);
+    TreeModel *model = new TreeModel(this, &_acc);
     ui->treeView->setModel(model);
+    ui->treeView->setIconSize(QSize(50,50));
+    ui->treeView->setAlternatingRowColors(true);
     ui->treeView->header()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->label->setText(QString("%1\n"

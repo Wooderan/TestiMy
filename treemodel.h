@@ -51,6 +51,9 @@
 #ifndef TREEMODEL_H
 #define TREEMODEL_H
 
+#include "test.h"
+#include "account.h"
+
 #include <QAbstractItemModel>
 #include <QModelIndex>
 #include <QVariant>
@@ -63,8 +66,7 @@ class TreeModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    TreeModel(const QStringList &headers, const QString &data,
-              QObject *parent = 0);
+    TreeModel(QObject *parent = nullptr, const Account *_acc = nullptr);
     ~TreeModel();
 //! [0] //! [1]
 
@@ -82,25 +84,26 @@ public:
 
 //! [2]
     Qt::ItemFlags flags(const QModelIndex &index) const override;
-    bool setData(const QModelIndex &index, const QVariant &value,
-                 int role = Qt::EditRole) override;
-    bool setHeaderData(int section, Qt::Orientation orientation,
-                       const QVariant &value, int role = Qt::EditRole) override;
+    bool setData(const QModelIndex &index, const Test &value,
+                 int role = Qt::EditRole);
+//    bool setHeaderData(int section, Qt::Orientation orientation,
+//                       const QVariant &value, int role = Qt::EditRole) override;
 
-    bool insertColumns(int position, int columns,
-                       const QModelIndex &parent = QModelIndex()) override;
-    bool removeColumns(int position, int columns,
-                       const QModelIndex &parent = QModelIndex()) override;
+//    bool insertColumns(int position, int columns,
+//                       const QModelIndex &parent = QModelIndex()) override;
+//    bool removeColumns(int position, int columns,
+//                       const QModelIndex &parent = QModelIndex()) override;
     bool insertRows(int position, int rows,
                     const QModelIndex &parent = QModelIndex()) override;
     bool removeRows(int position, int rows,
                     const QModelIndex &parent = QModelIndex()) override;
-
-private:
-    void setupModelData(const QStringList &lines, TreeItem *parent);
     TreeItem *getItem(const QModelIndex &index) const;
 
+private:
+    void setupModelData(TreeItem *parent);
+
     TreeItem *rootItem;
+    const Account* acc;
 };
 //! [2]
 

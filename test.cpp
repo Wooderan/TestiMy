@@ -135,25 +135,47 @@ QTextStream& operator<<(QTextStream& ostream, const Test& test)
 
 bool Test::Save() const
 {
-    QDir Dir(QCoreApplication::applicationDirPath());
-    if(!Dir.exists()) return false;
-    QFileInfoList list = Dir.entryInfoList();
-    auto it = std::find_if(list.begin(),list.end(), find_dir_name(DEFAULT_DIR_NAME));
-    if (it == list.end()) {//we dont find default tests folder
-        Dir.mkdir(DEFAULT_DIR_NAME);
+    if (!isCategory) {
+        QDir Dir(QCoreApplication::applicationDirPath());
+        if(!Dir.exists()) return false;
+        QFileInfoList list = Dir.entryInfoList();
+        auto it = std::find_if(list.begin(),list.end(), find_dir_name(DEFAULT_DIR_TEST_NAME));
+        if (it == list.end()) {//we dont find default tests folder
+            Dir.mkdir(DEFAULT_DIR_TEST_NAME);
+        }
+        Dir.cd(DEFAULT_DIR_TEST_NAME);
+
+        QString test_file_name = QString("%1/%2.testimy").arg(Dir.path()).arg(this->getName());
+        QFile test_file(test_file_name);
+        if (!test_file.open(QIODevice::WriteOnly)) return false;
+
+        QDataStream test_stream(&test_file);
+        test_stream << *this;
+    //    QTextStream test_stream(&test_file);
+    //    test_stream << *this;
+        test_file.close();
+        return true;
+    }else{
+        QDir Dir(QCoreApplication::applicationDirPath());
+        if(!Dir.exists()) return false;
+        QFileInfoList list = Dir.entryInfoList();
+        auto it = std::find_if(list.begin(),list.end(), find_dir_name(DEFAULT_DIR_CATEGORY_NAME));
+        if (it == list.end()) {//we dont find default tests folder
+            Dir.mkdir(DEFAULT_DIR_CATEGORY_NAME);
+        }
+        Dir.cd(DEFAULT_DIR_CATEGORY_NAME);
+
+        QString test_file_name = QString("%1/%2.testimy").arg(Dir.path()).arg(this->getName());
+        QFile test_file(test_file_name);
+        if (!test_file.open(QIODevice::WriteOnly)) return false;
+
+        QDataStream test_stream(&test_file);
+        test_stream << *this;
+    //    QTextStream test_stream(&test_file);
+    //    test_stream << *this;
+        test_file.close();
+        return true;
     }
-    Dir.cd(DEFAULT_DIR_NAME);
-
-    QString test_file_name = QString("%1/%2.testimy").arg(Dir.path()).arg(this->getName());
-    QFile test_file(test_file_name);
-    if (!test_file.open(QIODevice::WriteOnly)) return false;
-
-    QDataStream test_stream(&test_file);
-    test_stream << *this;
-//    QTextStream test_stream(&test_file);
-//    test_stream << *this;
-    test_file.close();
-    return true;
 }
 
 bool Test::Export(const QString &test_file_name) const
@@ -173,10 +195,10 @@ bool Test::Load(QString _fileName)
     QDir Dir(QCoreApplication::applicationDirPath());
     if(!Dir.exists()) return false;
     QFileInfoList list = Dir.entryInfoList();
-    auto it = std::find_if(list.begin(),list.end(), find_dir_name(DEFAULT_DIR_NAME));
+    auto it = std::find_if(list.begin(),list.end(), find_dir_name(DEFAULT_DIR_TEST_NAME));
     if (it == list.end()) //we dont find default tests folder
         return false;
-    Dir.cd(DEFAULT_DIR_NAME);
+    Dir.cd(DEFAULT_DIR_TEST_NAME);
 
     QString test_file_name = QString("%1/%2.testimy").arg(Dir.path()).arg(_fileName);
     QFile test_file(test_file_name);
@@ -190,19 +212,35 @@ bool Test::Load(QString _fileName)
 
 bool Test::Delete() const
 {
-    QDir Dir(QCoreApplication::applicationDirPath());
-    if(!Dir.exists()) return false;
-    QFileInfoList list = Dir.entryInfoList();
-    auto it = std::find_if(list.begin(),list.end(), find_dir_name(DEFAULT_DIR_NAME));
-    if (it == list.end()) //we dont find default tests folder
-        return false;
-    Dir.cd(DEFAULT_DIR_NAME);
+    if (!isCategory) {
+        QDir Dir(QCoreApplication::applicationDirPath());
+        if(!Dir.exists()) return false;
+        QFileInfoList list = Dir.entryInfoList();
+        auto it = std::find_if(list.begin(),list.end(), find_dir_name(DEFAULT_DIR_TEST_NAME));
+        if (it == list.end()) //we dont find default tests folder
+            return false;
+        Dir.cd(DEFAULT_DIR_TEST_NAME);
 
-    QString test_file_name = QString("%1/%2.testimy").arg(Dir.path()).arg(this->getName());
-    if (Dir.remove(test_file_name))
-        return true;
-    else
-        return false;
+        QString test_file_name = QString("%1/%2.testimy").arg(Dir.path()).arg(this->getName());
+        if (Dir.remove(test_file_name))
+            return true;
+        else
+            return false;
+    }else{
+        QDir Dir(QCoreApplication::applicationDirPath());
+        if(!Dir.exists()) return false;
+        QFileInfoList list = Dir.entryInfoList(QDir::AllDirs);
+        auto it = std::find_if(list.begin(),list.end(), find_dir_name(DEFAULT_DIR_CATEGORY_NAME));
+        if (it == list.end()) //we dont find default category folder
+            return false;
+        Dir.cd(DEFAULT_DIR_CATEGORY_NAME);
+
+        QString test_file_name = QString("%1/%2.testimy").arg(Dir.path()).arg(this->getName());
+        if (Dir.remove(test_file_name))
+            return true;
+        else
+            return false;
+    }
 }
 
 bool operator==(const Test &_left, const Test &_right)

@@ -59,7 +59,7 @@
 #include <QStringList>
 
 //! [0]
-TreeItem::TreeItem(const QVector<QVariant> &data, TreeItem *parent)
+TreeItem::TreeItem(const Test &data, TreeItem *parent)
 {
     parentItem = parent;
     itemData = data;
@@ -100,25 +100,27 @@ int TreeItem::childNumber() const
 //! [5]
 int TreeItem::columnCount() const
 {
-    return itemData.count();
+    return 1;
 }
 //! [5]
 
 //! [6]
 QVariant TreeItem::data(int column) const
 {
-    return itemData.value(column);
+    Q_UNUSED(column)
+    return itemData.getName();
 }
 //! [6]
 
 //! [7]
 bool TreeItem::insertChildren(int position, int count, int columns)
 {
+    Q_UNUSED(columns)
     if (position < 0 || position > childItems.size())
         return false;
 
     for (int row = 0; row < count; ++row) {
-        QVector<QVariant> data(columns);
+        Test data;
         TreeItem *item = new TreeItem(data, this);
         childItems.insert(position, item);
     }
@@ -128,19 +130,19 @@ bool TreeItem::insertChildren(int position, int count, int columns)
 //! [7]
 
 //! [8]
-bool TreeItem::insertColumns(int position, int columns)
-{
-    if (position < 0 || position > itemData.size())
-        return false;
+//bool TreeItem::insertColumns(int position, int columns)
+//{
+//    if (position < 0 || position > itemData.size())
+//        return false;
 
-    for (int column = 0; column < columns; ++column)
-        itemData.insert(position, QVariant());
+//    for (int column = 0; column < columns; ++column)
+//        itemData.insert(position, QVariant());
 
-    foreach (TreeItem *child, childItems)
-        child->insertColumns(position, columns);
+//    foreach (TreeItem *child, childItems)
+//        child->insertColumns(position, columns);
 
-    return true;
-}
+//    return true;
+//}
 //! [8]
 
 //! [9]
@@ -163,27 +165,48 @@ bool TreeItem::removeChildren(int position, int count)
 }
 //! [10]
 
-bool TreeItem::removeColumns(int position, int columns)
+//bool TreeItem::removeColumns(int position, int columns)
+//{
+//    if (position < 0 || position + columns > itemData.size())
+//        return false;
+
+//    for (int column = 0; column < columns; ++column)
+//        itemData.remove(position);
+
+//    foreach (TreeItem *child, childItems)
+//        child->removeColumns(position, columns);
+
+//    return true;
+//}
+
+//! [11]
+bool TreeItem::setData(int column, const Test &value)
 {
-    if (position < 0 || position + columns > itemData.size())
+    if (column < 0 || column >= 1)
         return false;
 
-    for (int column = 0; column < columns; ++column)
-        itemData.remove(position);
-
-    foreach (TreeItem *child, childItems)
-        child->removeColumns(position, columns);
-
+    itemData = value;
     return true;
 }
 
-//! [11]
-bool TreeItem::setData(int column, const QVariant &value)
+bool TreeItem::isCategory()
 {
-    if (column < 0 || column >= itemData.size())
-        return false;
+    return itemData.getIsCategory();
+}
 
-    itemData[column] = value;
-    return true;
+TreeItem *TreeItem::findChild(const QString &_name)
+{
+    int n = childItems.count();
+    for (int i = 0; i < n; i++) {
+        if (childItems.value(i)->data(0) == _name) {
+            return childItems.value(i);
+        }
+    }
+    return nullptr;
+}
+
+Test TreeItem::getTest()
+{
+    return itemData;
 }
 //! [11]

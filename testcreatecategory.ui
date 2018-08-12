@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TestCreateDialog</class>
- <widget class="QDialog" name="TestCreateDialog">
+ <class>TestCreateCategory</class>
+ <widget class="QDialog" name="TestCreateCategory">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -16,9 +16,6 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QFormLayout" name="formLayout">
-     <property name="labelAlignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
      <item row="0" column="0">
       <widget class="QLabel" name="label_name">
        <property name="text">
@@ -52,61 +49,32 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QTimeEdit" name="timeEdit"/>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Time:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="label_icon">
        <property name="text">
-        <string>Category:</string>
+        <string>Icon Image:</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEdit_category">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="lineEdit_iconPath">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_iconPath">
+         <property name="text">
+          <string>...</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QScrollArea" name="scrollArea">
-     <property name="autoFillBackground">
-      <bool>true</bool>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>380</width>
-        <height>68</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="pushButton_add">
-     <property name="text">
-      <string>Add question</string>
-     </property>
-    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -125,7 +93,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>TestCreateDialog</receiver>
+   <receiver>TestCreateCategory</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -141,7 +109,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>TestCreateDialog</receiver>
+   <receiver>TestCreateCategory</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

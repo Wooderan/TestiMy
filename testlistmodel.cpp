@@ -19,10 +19,10 @@ bool TestListModel::Load()
     QDir Dir(QCoreApplication::applicationDirPath());
     if(!Dir.exists()) return false;
     QFileInfoList list = Dir.entryInfoList();
-    auto it = std::find_if(list.begin(),list.end(), find_dir_name(DEFAULT_DIR_NAME));
+    auto it = std::find_if(list.begin(),list.end(), find_dir_name(DEFAULT_DIR_TEST_NAME));
     if (it == list.end()) //we dont find default tests folder
         return false;
-    Dir.cd(DEFAULT_DIR_NAME);
+    Dir.cd(DEFAULT_DIR_TEST_NAME);
 
 
     list = Dir.entryInfoList();

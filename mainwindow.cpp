@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "testexaminedialog.h"
+#include "treeitem.h"
 
 #include <QMessageBox>
 #include <accountslist.h>
@@ -14,8 +15,10 @@ MainWindow::MainWindow(const Account &_account, QWidget *parent) :
     ui->setupUi(this);
 
     //filling listview and model
-    tests = new TestListModel(this, &account);
+    tests = new TreeModel(this, &account);
     ui->listView_tests->setModel(tests);
+    ui->listView_tests->setIconSize(QSize(50,50));
+    ui->listView_tests->setAlternatingRowColors(true);
 
     //filling account info
     ui->label_accountInfo->setText(QString("%1\n"
@@ -63,7 +66,7 @@ void MainWindow::test_change(const QItemSelection &selected, const QItemSelectio
     Q_UNUSED(deselected)
     QModelIndexList indexList = selected.indexes();
     // we always will have only one selected item
-    TreeCategory* category = static_cast<TreeCategory*>(indexList[0].internalPointer());
+    TreeItem* category = static_cast<TreeItem*>(indexList[0].internalPointer());
     if (category->isCategory()){
         if (ui->pushButton_passTest->isEnabled())
             ui->pushButton_passTest->setEnabled(false);
@@ -108,7 +111,7 @@ void MainWindow::test_change(const QItemSelection &selected, const QItemSelectio
 void MainWindow::on_pushButton_passTest_clicked()
 {
     QModelIndex idx = ui->listView_tests->selectionModel()->currentIndex();
-    TreeCategory* category = static_cast<TreeCategory*>(ui->listView_tests->selectionModel()->currentIndex().internalPointer());
+    TreeItem* category = static_cast<TreeItem*>(ui->listView_tests->selectionModel()->currentIndex().internalPointer());
     if (category->isCategory()) return;
     Test test = category->getTest();
     QString testName = test.getName();
@@ -120,15 +123,6 @@ void MainWindow::on_pushButton_passTest_clicked()
     if (dialog->exec() == QDialog::Accepted) {
         if (account.getResult(testName) == Account::NO_RESULT) {
             account.setResult(testName, dialog->getMark());
-            ui->label_1->setText("Subject: ");
-            ui->textBrowser_1->setText(test.getName());
-            ui->label_2->setText("Description: ");
-            ui->textBrowser_2->setText(test.getDescripton());
-            ui->label_3->setText("Time: ");
-            ui->textBrowser_3->setText(test.getTime().toString());
-            ui->label_4->setText("Questions: ");
-            ui->textBrowser_4->setText(QString::number(test.getN()));
-            ui->label_5->setText("Your result: ");
             ui->textBrowser_4->setText(QString::number(account.getResult(testName)));
 
             AccountsList list;
@@ -136,9 +130,9 @@ void MainWindow::on_pushButton_passTest_clicked()
             list.deleteAccount(account.getLogin());
             list.addAccount(account);
             list.Save();
-            tests->dataChanged(idx,tests->secondColumn(idx));
-//            QModelIndex idx2 = tests->secondColumn(idx);
-//            QString str = qvariant_cast<QString>(tests->data(tests->secondColumn(idx),Qt::DisplayRole));
+
+            tests->setData(idx, test);
+//            tests->dataChanged(idx,tests->secondColumn(idx));
         }
 
     }

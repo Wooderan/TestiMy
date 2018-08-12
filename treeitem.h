@@ -54,12 +54,13 @@
 #include <QList>
 #include <QVariant>
 #include <QVector>
+#include "test.h"
 
 //! [0]
 class TreeItem
 {
 public:
-    explicit TreeItem(const QVector<QVariant> &data, TreeItem *parent = 0);
+    explicit TreeItem(const Test &data, TreeItem *parent = nullptr);
     ~TreeItem();
 
     TreeItem *child(int number);
@@ -67,16 +68,20 @@ public:
     int columnCount() const;
     QVariant data(int column) const;
     bool insertChildren(int position, int count, int columns);
-    bool insertColumns(int position, int columns);
+//    bool insertColumns(int position, int columns);
     TreeItem *parent();
     bool removeChildren(int position, int count);
-    bool removeColumns(int position, int columns);
+//    bool removeColumns(int position, int columns);
     int childNumber() const;
-    bool setData(int column, const QVariant &value);
+    bool setData(int column, const Test &value);
+
+    bool isCategory();
+    TreeItem* findChild(const QString& _name);
+    Test getTest();
 
 private:
     QList<TreeItem*> childItems;
-    QVector<QVariant> itemData;
+    Test itemData;
     TreeItem *parentItem;
 };
 //! [0]
