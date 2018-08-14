@@ -83,6 +83,7 @@ void CreateAccountForm::on_buttonBox_rejected()
 {
     QStackedWidget *widget = dynamic_cast<QStackedWidget*>(parent());
     if (widget != nullptr) {
+        static_cast<QDialog*>(widget->parent())->setWindowTitle("Log In");
         widget->setCurrentIndex(0);
     }else
         dialog->reject();

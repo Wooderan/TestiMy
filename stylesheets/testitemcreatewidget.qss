@@ -3,6 +3,10 @@
     border-bottom:2px solid #e78e2d;
     border-radius: 4px;
 }
+QWidget{
+    font-family: 'Roboto', sans-serif;
+    font-size:16px;
+}
 
 QPushButton{
 border-style:solid;

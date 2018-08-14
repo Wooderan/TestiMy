@@ -1,6 +1,7 @@
 #include "testitemwidget2.h"
 #include "ui_testitemwidget2.h"
 
+#include <QFile>
 #include <QPainter>
 #include <QRadioButton>
 
@@ -21,6 +22,7 @@ TestItemWidget2::TestItemWidget2(const TestItem &_item, QWidget *parent) :
 }
 
 void TestItemWidget2::paintEvent(QPaintEvent *pe) {
+    Q_UNUSED(pe)
   QStyleOption o;
   o.initFrom(this);
   QPainter p(this);

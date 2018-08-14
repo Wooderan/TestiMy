@@ -4,6 +4,8 @@
 #include <QLineEdit>
 #include <QDebug>
 #include <QRadioButton>
+#include <QFile>
+#include <QPainter>
 
 TestItemCreateWidget::TestItemCreateWidget(QWidget *parent, const TestItem *_item) :
     QWidget(parent),
@@ -42,6 +44,15 @@ TestItemCreateWidget::TestItemCreateWidget(QWidget *parent, const TestItem *_ite
         }
     }
 }
+
+void TestItemCreateWidget::paintEvent(QPaintEvent *pe) {
+    Q_UNUSED(pe)
+  QStyleOption o;
+  o.initFrom(this);
+  QPainter p(this);
+  style()->drawPrimitive(QStyle::PE_Widget, &o, &p, this);
+};
+
 
 TestItemCreateWidget::~TestItemCreateWidget()
 {
@@ -128,4 +139,9 @@ MyPushButton::MyPushButton(QWidget *parent)
     :QPushButton (parent)
 {
 
+}
+
+void TestItemCreateWidget::on_pushButton_clicked()
+{
+    emit deleteMe();
 }

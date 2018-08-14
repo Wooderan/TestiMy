@@ -72,12 +72,18 @@ public:
 
     TestItem getItem() const;
 
+signals:
+    void deleteMe();
+
 private slots:
     void on_addBtn_clicked();
     void deleteLine();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::TestItemCreateWidget *ui;
+    void paintEvent(QPaintEvent *pe);
 };
 
 #endif // TEXTITEMCREATEWIDGET_H

@@ -13,6 +13,7 @@ MainWindow::MainWindow(const Account &_account, QWidget *parent) :
     account(_account)
 {
     ui->setupUi(this);
+    setWindowTitle("TestiMy");
 
     //filling listview and model
     tests = new TreeModel(this, &account);
@@ -123,7 +124,7 @@ void MainWindow::on_pushButton_passTest_clicked()
     if (dialog->exec() == QDialog::Accepted) {
         if (account.getResult(testName) == Account::NO_RESULT) {
             account.setResult(testName, dialog->getMark());
-            ui->textBrowser_4->setText(QString::number(account.getResult(testName)));
+            ui->textBrowser_5->setText(QString::number(account.getResult(testName)));
 
             AccountsList list;
             list.Load();

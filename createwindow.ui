@@ -188,14 +188,14 @@ border-radius:2px;</string>
       <item row="0" column="1">
        <widget class="QPushButton" name="pushButton_make_category">
         <property name="text">
-         <string>Make Category</string>
+         <string>Create Category</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QPushButton" name="pushButton_make">
         <property name="text">
-         <string>Make Test</string>
+         <string>Create Test</string>
         </property>
        </widget>
       </item>
@@ -242,7 +242,7 @@ border-radius:2px;</string>
          <bool>false</bool>
         </property>
         <property name="text">
-         <string>Export Test</string>
+         <string>Import Test</string>
         </property>
        </widget>
       </item>

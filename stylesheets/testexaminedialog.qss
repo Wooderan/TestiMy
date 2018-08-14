@@ -2,6 +2,11 @@ QDialog{
     background-color:#1d1d1d;
 }
 
+QDialog, QWidget{
+    font-family: 'Roboto', sans-serif;
+    font-size:16px;
+}
+
 QScrollArea {
 background: transparent;
 border:1px solid #2d89ef;
@@ -133,16 +138,8 @@ QLabel#label_Description{
     font-size: 20px;
     color:#fff;
 }
-
-QTimeEdit{
+/* .TestItemWidget2{
+    border-bottom:2px solid orange;
     border-radius:4px;
-    background:#666666;
-    border:2px solid #2d89ef;
-}
-
-QTimeEdit{
-    border-radius:4px;
-    background:#666666;
-    border:2px solid red;
-}
+}*/
 

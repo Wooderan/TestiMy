@@ -17,6 +17,7 @@ CreateWindow::CreateWindow(const Account &_account, QWidget *parent) :
     account(_account)
 {
     ui->setupUi(this);
+    setWindowTitle("TestiMy");
 
     QFile file(":/qss/stylesheets/createwindows.qss");
     file.open(QFile::ReadOnly);
@@ -134,6 +135,7 @@ void CreateWindow::on_pushButton_clicked()
 void CreateWindow::on_actionChange_login_or_password_triggered()
 {
     ChangePasswordDialog *dialog = new ChangePasswordDialog(account, this);
+    dialog->setWindowTitle("Change login and password");
     if (dialog->exec() == QDialog::Accepted) {
         AccountsList list;
         list.Load();
@@ -146,6 +148,7 @@ void CreateWindow::on_actionChange_login_or_password_triggered()
 void CreateWindow::on_actionManage_accounts_triggered()
 {
     ManageAccountsDialog *dialog = new ManageAccountsDialog(this);
+    dialog->setWindowTitle("Account manager");
     dialog->setWindowState(dialog->windowState() | Qt::WindowMaximized);
     dialog->exec();
 }
@@ -170,6 +173,7 @@ void CreateWindow::on_pushButton_make_clicked()
 
 
     TestCreateDialog *dialog = new TestCreateDialog(category, this);
+    dialog->setWindowTitle("Create test");
     dialog->setWindowState(dialog->windowState() | Qt::WindowMaximized);
     if (dialog->exec() == QDialog::Accepted) {
         const Test& test = dialog->getTest();
@@ -206,6 +210,7 @@ void CreateWindow::on_pushButton_change_clicked()
     }else{
         QModelIndex categoryIndex = index.parent();
         TestCreateDialog *dialog = new TestCreateDialog(this, &test);
+        dialog->setWindowTitle("Change test");
         dialog->setWindowState(dialog->windowState() | Qt::WindowMaximized);
         if (dialog->exec() == QDialog::Accepted) {
             const Test& test = dialog->getTest();
@@ -236,6 +241,7 @@ void CreateWindow::on_pushButton_make_category_clicked()
 {
     TestCreateCategory *dialog = new TestCreateCategory(this);
 //    dialog->setWindowState(dialog->windowState() | Qt::WindowMaximized);
+    dialog->setWindowTitle("Create category");
     dialog->resize(800, 400);
     if (dialog->exec() == QDialog::Accepted) {
         const Test& test = dialog->getTest();

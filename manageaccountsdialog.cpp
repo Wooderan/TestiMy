@@ -2,6 +2,8 @@
 #include "ui_manageaccountsdialog.h"
 #include "accountsstatsdialog.h"
 
+#include <QMessageBox>
+
 ManageAccountsDialog::ManageAccountsDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ManageAccountsDialog)
@@ -48,7 +50,10 @@ void ManageAccountsDialog::on_pushButton_delete_clicked()
 void ManageAccountsDialog::on_pushButton_change_clicked()
 {
     QItemSelectionModel *selection = ui->listView->selectionModel();
-    if (!selection->hasSelection()) return;
+    if (!selection->hasSelection()) {
+        QMessageBox::critical(this, "Error", "Select account first");
+        return;
+    }
     QString login = qvariant_cast<QString>(model->data(selection->currentIndex(), Qt::DisplayRole));
     model->changeAccount(login);
 }
@@ -56,6 +61,7 @@ void ManageAccountsDialog::on_pushButton_change_clicked()
 void ManageAccountsDialog::on_pushButton_stats_clicked()
 {
     AccountsStatsDialog* dialog = new AccountsStatsDialog(model->getAccount(ui->listView->selectionModel()->currentIndex()), this);
+    dialog->setWindowTitle("Statistic");
     dialog->resize(800,600);
     dialog->exec();
 }

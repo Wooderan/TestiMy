@@ -21,6 +21,7 @@ TestCreateDialog::TestCreateDialog(QWidget *parent, const Test *_test) :
         for (size_t i = 0; i < n; i++) {
             TestItem item = _test->at(i);
             TestItemCreateWidget *itemWidget = new TestItemCreateWidget(this, &item);
+            QObject::connect(itemWidget, &TestItemCreateWidget::deleteMe, this, &TestCreateDialog::deleteMe_handler);
             QWidget* widget = ui->scrollArea->widget();
             QLayout* layout = widget->layout();
             if (layout == nullptr) {
@@ -50,6 +51,7 @@ TestCreateDialog::~TestCreateDialog()
 void TestCreateDialog::on_pushButton_add_clicked()
 {
     TestItemCreateWidget  *item = new TestItemCreateWidget(this);
+    QObject::connect(item, &TestItemCreateWidget::deleteMe, this, &TestCreateDialog::deleteMe_handler);
 
     QWidget* widget = ui->scrollArea->widget();
     QLayout* layout = widget->layout();
@@ -60,6 +62,11 @@ void TestCreateDialog::on_pushButton_add_clicked()
     widget->setLayout(layout);
     QObject::connect(ui->scrollArea->verticalScrollBar(), &QScrollBar::rangeChanged, this, &TestCreateDialog::scrollEvent);
     ui->scrollArea->setWidget(widget);
+}
+
+void TestCreateDialog::deleteMe_handler()
+{
+    delete sender();
 }
 
 void TestCreateDialog::scrollEvent(int min, int max)

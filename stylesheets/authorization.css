@@ -2,6 +2,11 @@ QDialog{
     background-color:#1d1d1d;
 }
 
+QDialog, QWidget{
+    font-family: 'Roboto', sans-serif;
+    font-size:16px;
+}
+
 QPushButton{
 border-style:solid;
 
@@ -32,10 +37,11 @@ QLabel{
 }
 
 QGroupBox {
-color:#fff;
+    color:#fff;
     border: 2px solid #4f4a4a;
     border-radius: 5px;
     margin-top: 1ex; /* leave space at the top for the title */
+    padding-top:2ex;
 }
 
 QRadioButton{

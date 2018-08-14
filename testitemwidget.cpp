@@ -1,5 +1,6 @@
 #include "testitemwidget.h"
 
+#include <QFile>
 #include <QLabel>
 #include <QRadioButton>
 

@@ -56,6 +56,7 @@ void LoginForm::on_buttonBox_accepted()
 
 void LoginForm::on_buttonBox_rejected()
 {
+
     dialog->reject();
 }
 
@@ -63,5 +64,7 @@ void LoginForm::on_buttonBox_rejected()
 
 void LoginForm::on_pushButton_create_clicked()
 {
+    QStackedWidget *widget = dynamic_cast<QStackedWidget*>(parent());
+    static_cast<QDialog*>(widget->parent())->setWindowTitle("Log Up");
     dialog->setSubWidget(dialog->getCreateId());
 }

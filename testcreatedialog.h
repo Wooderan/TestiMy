@@ -18,11 +18,13 @@ public:
     ~TestCreateDialog();
 
     Test getTest() const;
+    void deleteMe_handler();
 
 private slots:
     void on_accepted();
 
     void on_pushButton_add_clicked();
+
 
 private:
     Ui::TestCreateDialog *ui;

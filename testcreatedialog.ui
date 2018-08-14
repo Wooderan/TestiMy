@@ -22,7 +22,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="label_name">
        <property name="text">
-        <string>Name:</string>
+        <string>Test name:</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

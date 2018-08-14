@@ -14,8 +14,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QFontDatabase::addApplicationFont(":/fonts/fonts/Anton-Regular.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/fonts/Lora-Bold.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/fonts/Roboto-Medium.ttf");
     AuthorizationDialog authorize;
+    authorize.setWindowTitle("Log In");
     Account acc;
     if (authorize.exec() == QDialog::Accepted) {
         acc = authorize.getCurr_account();

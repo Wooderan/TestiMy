@@ -13,6 +13,7 @@ TestExamineDialog::TestExamineDialog(const Test &_test, QWidget *parent) :
     ui(new Ui::TestExamineDialog)
 {
     ui->setupUi(this);
+
     QFile file(":/qss/stylesheets/testexaminedialog.qss");
     file.open(QFile::ReadOnly);
     QString styleSheet(file.readAll());
@@ -126,10 +127,10 @@ void TestExamineDialog::update_timer()
 
     if (time < QTime(0,0,30)) {
         if (b) {
-            ui->timer_edit->setStyleSheet("QTimeEdit{border-radius:4px;background:#666666;border:2px solid #2d89ef;}");
+            ui->timer_edit->setStyleSheet("QTimeEdit{border-radius:4px;background:#666666;border:2px solid #2d89ef;font-size:16px;}");
             b = false;
         }else{
-            ui->timer_edit->setStyleSheet("QTimeEdit{border-radius:4px;background:#666666;border:2px solid red;}");
+            ui->timer_edit->setStyleSheet("QTimeEdit{border-radius:4px;background:#666666;border:2px solid red;font-size:16px;}");
             b = true;
         }
     }

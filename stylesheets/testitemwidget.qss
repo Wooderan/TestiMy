@@ -13,6 +13,10 @@ background: qlineargradient(spread:pad, x1:0.502, y1:0, x2:0.517, y2:1, stop:0 r
 border-bottom:2px solid #e78e2d;
 border-radius: 4px;
 }
+QWidget{
+    font-family: 'Roboto', sans-serif;
+    font-size:16px;
+}
 
 QPushButton{
 border-style:solid;
